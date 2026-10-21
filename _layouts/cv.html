@@ -34,7 +34,8 @@
             {%- if forloop.first == false or cv.location -%}<span class="sep" aria-hidden="true">&nbsp;·</span> {% endif -%}
             {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
             {%- assign href = href | strip -%}
-            {%- if href != "" -%}<a class="item" href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- else -%}<span class="item">{{ l.label | xml_escape | replace: "&apos;", "’" }}</span>{%- endif -%}
+            {%- capture ico -%}{%- if l.icon -%}{%- include icon.html name=l.icon -%}{%- endif -%}{%- endcapture -%}
+            {%- if href != "" -%}<a class="item" href="{{ href }}">{{ ico }}{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- else -%}<span class="item">{{ ico }}{{ l.label | xml_escape | replace: "&apos;", "’" }}</span>{%- endif -%}
           {%- endfor -%}
           {%- assign pdf = site.static_files | where: "path", "/assets/cv.pdf" | first -%}
           {%- if pdf -%}<span class="sep" aria-hidden="true">&nbsp;·</span> <a class="item" href="{{ pdf.path | relative_url }}">PDF</a>{%- endif -%}

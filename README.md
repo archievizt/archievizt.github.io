@@ -13,9 +13,10 @@ My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 - `cv.html`, `_layouts/cv.html`, and `assets/css/cv.css` lay out the CV page. Its colours sit at the top of `cv.css`.
 - `_includes/security-headers.html` holds the Content Security Policy for every page.
 - `_includes/safe-url.html` checks every link that comes from `_data/cv.yml`.
+- `_includes/icon.html` draws the small icons next to the CV's header links (a globe, code brackets, a person). Pick one per link with `icon:` in `_data/cv.yml`.
 - `_config.yml` holds the name, the sidebar (intro, links, status line), the description search engines show, site address, and theme.
 - `_layouts/default.html` is the Minimal theme layout, hardened, with the sidebar built from `_config.yml` and a tidier footer.
-- `assets/css/style.scss` sets the home page's dark colours (listed at the top of the file) and adds the small touches (status dot, tag chips).
+- `assets/css/style.scss` sets the home page's dark colours (listed at the top of the file), the wider layout (up to 1100px across, a 780px text column), and the small touches (status dot, tag chips).
 - `netops-automation/` is the netops-automation field report, a standalone page with its own stylesheet and Content Security Policy.
 - `assets/cv.pdf` is optional. Add it and a PDF link appears on the CV page.
 - `SECURITY.md` says how to report a security problem; `.env.example` is the template for local settings.

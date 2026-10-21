@@ -6,19 +6,23 @@
 # - Links must start with https://, mailto:, or / (a page on this site).
 #   Anything else (http://, javascript:) shows as plain text, not a link.
 # - This file is public. No phone number, home address, or personal email.
+# - A header link can show a small icon: icon: "web", "code" or "person".
+#   Leave the icon line out for no icon.
 
 name: "Armando Abeleda Jr."
 title: "Network and Security Specialist"
 motto: "Paranoid by trade, boring by design."
-location: "British Columbia, Canada"
 
 links:
   - label: "archievizt.github.io"
     url: "https://archievizt.github.io"
+    icon: "web"
   - label: "github.com/archievizt"
     url: "https://github.com/archievizt"
+    icon: "code"
   - label: "linkedin.com/in/ajrabeleda"
     url: "https://www.linkedin.com/in/ajrabeleda"
+    icon: "person"
 
 summary:
   - "Network and Security Specialist working since 2015 across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. Most of that time has gone into segmentation, firewall policy, and change control, and into coordinating the network side when something breaks anyway."
