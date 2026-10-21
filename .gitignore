@@ -1,0 +1,58 @@
+# Keeps secrets, local state, and build output out of git.
+# The GitHub upload page does not read this file; it protects you when you
+# use git on your own computer. Gemfile.lock is deliberately NOT ignored:
+# commit it after your first `bundle install` so versions stay pinned.
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.kdbx
+id_rsa*
+id_ecdsa*
+id_ed25519*
+.netrc
+credentials*.json
+*service-account*.json
+secrets.yml
+secrets.yaml
+
+# Terraform and other local state
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Ruby and Bundler local installs
+.bundle/
+vendor/
+
+# Python, if scripts are ever added
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# Logs
+*.log
