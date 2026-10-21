@@ -2,9 +2,16 @@
 <!--
   Minimal theme layout by orderedlist (pages-themes/minimal v0.2.0, CC0).
   Local copy with these changes: a Content Security Policy
-  (_includes/security-headers.html), no JavaScript, the profile link taken
-  from github_username in _config.yml, a build-time cache-buster for the
-  stylesheet, and a full stop in the footer.
+  (_includes/security-headers.html), no JavaScript, a sidebar built from
+  the sidebar settings in _config.yml (ID lines, intro, optional motto,
+  status, links) in place of the description and the "View My GitHub
+  Profile" link, a build-time cache-buster for the stylesheet, and a full
+  stop in the footer. The description in _config.yml is not shown on the
+  page; jekyll-seo-tag uses it for search engines and link previews.
+
+  Every sidebar value is HTML-escaped (xml_escape, with apostrophes turned
+  into ’), and every sidebar link goes through _includes/safe-url.html, so
+  only https://, mailto:, and site-relative (/...) links get through.
 -->
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -21,16 +28,46 @@
     <div class="wrapper">
       <header>
         <h1><a href="{{ "/" | absolute_url }}">{{ site.title | xml_escape }}</a></h1>
+        {%- assign sb = site.sidebar %}
+
+        {% if sb.id or sb.run_as -%}
+        <p class="idblock">
+          {%- if sb.id -%}<span class="k">ID:</span> {{ sb.id | xml_escape | replace: "&apos;", "’" }}{%- endif -%}
+          {%- if sb.id and sb.run_as -%}<br>{%- endif -%}
+          {%- if sb.run_as -%}<span class="k">Run as:</span> {{ sb.run_as | xml_escape | replace: "&apos;", "’" }}{%- endif -%}
+        </p>
+        {%- endif %}
 
         {% if site.logo %}
           <img src="{{ site.logo | relative_url }}" alt="Logo" />
         {% endif %}
 
-        <p>{{ site.description | xml_escape }}</p>
+        {% if sb.intro -%}
+        <p class="intro">{{ sb.intro | xml_escape | replace: "&apos;", "’" }}</p>
+        {%- endif %}
 
-        {% if site.github_username %}
-        <p class="view"><a href="https://github.com/{{ site.github_username | uri_escape }}">View My GitHub Profile</a></p>
-        {% endif %}
+        {% if sb.motto -%}
+        <p class="motto">“{{ sb.motto | xml_escape | replace: "&apos;", "’" }}”</p>
+        {%- endif %}
+
+        {% if sb.status -%}
+        <p class="status"><span class="dot" aria-hidden="true"></span>{{ sb.status | xml_escape | replace: "&apos;", "’" }}</p>
+        {%- endif %}
+
+        {%- comment -%}
+          Separators carry a non-breaking space on their left, so a wrapped
+          line never starts with a dot.
+        {%- endcomment %}
+        {% if sb.links -%}
+        <p class="links">
+          {%- for l in sb.links -%}
+            {%- unless forloop.first -%}<span class="sep" aria-hidden="true">&nbsp;·</span> {% endunless -%}
+            {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
+            {%- assign href = href | strip -%}
+            {%- if href != "" -%}<a href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- else -%}{{ l.label | xml_escape | replace: "&apos;", "’" }}{%- endif -%}
+          {%- endfor -%}
+        </p>
+        {%- endif %}
       </header>
       <section>
 

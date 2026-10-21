@@ -3,33 +3,19 @@ layout: default
 title: Archie Abeleda
 ---
 
-# Archie Abeleda
-
-<p class="idblock"><span class="k">ID:</span> Armando Abeleda Jr.<br><span class="k">Run as:</span> Archie</p>
-
-**Network and Security Specialist**
-
-*"Paranoid by trade, boring by design."*
-
-<p class="status"><span class="dot" aria-hidden="true"></span>Systems operational</p>
-
-[CV]({{ '/cv.html' | relative_url }}) · [GitHub](https://github.com/archievizt) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [Email](mailto:hello@archieabeleda.dev)
-
 ## About
 
 I know where AI earns its keep on a network, and where it's just confident nonsense.
 {: .head}
 
-Over a decade keeping high-stakes networks locked down and online. Belt and braces on every layer. Now I point the same paranoia at my own kit.
-
 Lately my off hours go to pointing AI at the network. A home lab where local models read device state, pull the real config, and reason about it out loud. They get to look and think. They do not get a write path, and nothing reaches a device without going through me first. Same instinct I bring to work, with a lot more freedom to break things.
 
 ### Certifications
 
-- [CISSP](https://www.credly.com/badges/00c78370-a452-4af7-bec9-78c4dd4a7720), Certified Information Systems Security Professional
-- [CCSP](https://www.credly.com/badges/651c7d74-5b6c-49fd-997b-9a498aa21085), Certified Cloud Security Professional
+- [Certified Information Systems Security Professional (CISSP)](https://www.credly.com/badges/00c78370-a452-4af7-bec9-78c4dd4a7720)
+- [Certified Cloud Security Professional (CCSP)](https://www.credly.com/badges/651c7d74-5b6c-49fd-997b-9a498aa21085)
 - [Cisco Certified Specialist (Security)](https://www.credly.com/badges/cd480174-94f9-4bbc-83a9-6b7c5ceb7ab5)
-- Cisco Certified Specialist (Enterprise)
+- [Cisco Certified Specialist (Enterprise)](https://www.credly.com/badges/52465f7d-ecf4-42b1-a696-170059bb1f92)
 
 ### How I work
 
@@ -102,17 +88,6 @@ Over a decade of enterprise kit, plus the self-hosted AI stack I run at home. Gr
 - **Platforms:** `CentOS` `Ubuntu` `Proxmox VE` `Firebase Hosting`
 - **AI Stack:** `Ollama` `Qwen3` `Gemma 4` `nomic-embed-text` `Qdrant` `RAG` `Open WebUI` `OpenClaw` `Gradio`
 {: .stack}
-
----
-
-## Contact
-
-Let's talk.
-{: .head}
-
-Networks, security architecture, or pointing AI at infrastructure without it going sideways. Always up for comparing notes.
-
-[hello@archieabeleda.dev](mailto:hello@archieabeleda.dev) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [GitHub](https://github.com/archievizt)
 
 ---
 

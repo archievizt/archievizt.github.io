@@ -33,14 +33,17 @@
        url("../fonts/Noto-Sans-700italic/Noto-Sans-700italic.woff") format("woff");
 }
 
+/* Cream palette. Print swaps the background for white (see the end). */
 :root {
-  --ink: #1f1f1f;
-  --body: #3a3a3a;
-  --soft: #5c5c5c;
-  --faint: #8c8c8c;
-  --rule: #222222;
-  --hair: #e4e4e4;
-  --link: #267cb9;
+  color-scheme: light;
+  --bg: #FAF8F3;    /* background, soft cream */
+  --ink: #17232B;   /* name and job titles, deep navy */
+  --body: #2C3A44;  /* body text and bullets, dark slate */
+  --meta: #5D6A74;  /* dates, company names, location and tagline, muted slate */
+  --link: #2371A9;  /* links and section labels such as EXPERIENCE, blue */
+  --rule: #17232B;  /* line under each section label, same navy as the name */
+  --hair: rgba(93, 106, 116, 0.25); /* thin footer line, muted slate at low strength */
+  --dots: rgba(93, 106, 116, 0.55); /* separator dots, muted slate at half strength */
 }
 
 * { box-sizing: border-box; }
@@ -49,7 +52,7 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: #ffffff;
+  background: var(--bg);
   color: var(--body);
   font: 14px/1.6 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -73,10 +76,10 @@ h1 {
   font-weight: 700;
 }
 .cv-title { margin: 0; color: var(--ink); }
-.cv-motto { margin: 2px 0 0; color: var(--faint); font-size: 13px; font-style: italic; }
-.cv-contact { margin: 12px 0 0; color: var(--soft); font-size: 13px; }
-.cv-contact a { color: var(--soft); }
-.sep { padding-left: 4px; margin-right: 4px; color: #c2c2c2; }
+.cv-motto { margin: 2px 0 0; color: var(--meta); font-size: 13px; font-style: italic; }
+.cv-contact { margin: 12px 0 0; color: var(--meta); font-size: 13px; }
+.cv-contact a { color: var(--link); }
+.sep { padding-left: 4px; margin-right: 4px; color: var(--dots); }
 
 .cv-summary { margin-top: 24px; }
 .cv-summary p { margin: 0 0 10px; }
@@ -86,7 +89,7 @@ h2 {
   margin: 34px 0 16px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--rule);
-  color: var(--ink);
+  color: var(--link);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -111,17 +114,16 @@ h3 {
   font-weight: 700;
 }
 h3.plain { font-weight: 400; }
-h3 a { color: var(--ink); }
-h3.plain a { color: var(--link); }
-.org { color: var(--soft); font-weight: 400; }
+h3 a, h3.plain a { color: var(--link); }
+.org { color: var(--meta); font-weight: 400; }
 
-.when { color: var(--faint); font-size: 12px; white-space: nowrap; }
+.when { color: var(--meta); font-size: 12px; white-space: nowrap; }
 
 .entry-sub { margin: 3px 0 6px; }
 .entry ul { margin: 6px 0 0; padding-left: 18px; }
 .entry li { margin: 3px 0; }
 
-.source { margin: 0; color: var(--faint); font-size: 12px; }
+.source { margin: 0; color: var(--meta); font-size: 12px; }
 
 /* Skills */
 table.skills { width: 100%; border-collapse: collapse; }
@@ -141,10 +143,10 @@ table.skills { width: 100%; border-collapse: collapse; }
   margin-top: 40px;
   padding-top: 16px;
   border-top: 1px solid var(--hair);
-  color: var(--faint);
+  color: var(--meta);
   font-size: 12px;
 }
-.cv-foot a { color: var(--soft); }
+.cv-foot a { color: var(--link); }
 
 /* Phones */
 @media (max-width: 560px) {
@@ -160,9 +162,8 @@ table.skills { width: 100%; border-collapse: collapse; }
 /* Print: browser "Save as PDF" gives a clean, tighter CV */
 @media print {
   @page { margin: 12mm 13mm; }
-  body { color: #000000; font-size: 8.8pt; line-height: 1.38; }
+  body { background: #FFFFFF; font-size: 8.8pt; line-height: 1.38; }
   .cv { max-width: none; padding: 0; }
-  a, h3 a, h3.plain a, .cv-contact a { color: inherit; }
   h1 { font-size: 15pt; margin-bottom: 1pt; }
   h2 { margin: 11pt 0 6pt; padding-bottom: 3pt; font-size: 7.5pt; break-after: avoid; }
   h3 { font-size: 9.2pt; }

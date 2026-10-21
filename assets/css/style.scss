@@ -3,19 +3,78 @@
 
 @import "jekyll-theme-minimal";
 
-/* Small additions on top of the Minimal theme for the home page. */
+/*
+  Home page colours and small additions on top of the Minimal theme.
+  Dark palette: deep blue-slate background, cool grey text, blue as the
+  only accent colour, plus the green status dot.
+*/
+
+$bg:     #0D161C; /* background, deep blue-slate */
+$ink:    #E8EEF3; /* headings, bold text and code, near-white */
+$text:   #B4C1CB; /* body text, soft slate */
+$link:   #56A4DC; /* your name and links, light blue */
+$hover:  #8DC2E8; /* links on hover, paler blue */
+$muted:  #7F8F9A; /* small text, ID and Run as labels, footer */
+$raised: #142029; /* code blocks and skill tag backgrounds */
+$line:   #22303A; /* borders, dividers and tag outlines */
+$ok:     #1BA48D; /* status dot */
+
+:root { color-scheme: dark; }
+
+body {
+  background-color: $bg;
+  color: $text;
+}
+
+h1, h2, h3, h4, h5, h6,
+strong, dt, th { color: $ink; }
+
+a { color: $link; }
+a:hover, a:focus { color: $hover; }
+a small, a:hover small { color: $muted; }
+
+small, footer { color: $muted; }
+
+code, pre { color: $ink; }
+pre,
+.highlight {
+  background-color: $raised;
+  border-color: $line;
+}
+kbd {
+  background-color: $raised;
+  border-color: $line;
+  box-shadow: inset 0 -1px 0 $line;
+  color: $ink;
+}
+blockquote { border-left-color: $line; }
+th, td { border-bottom-color: $line; }
+hr { background: $line; }
+
+@media print, screen and (max-width: 960px) {
+  section { border-color: $line; }
+}
+
+/* Sidebar: ID lines under the title, then the intro, status and links. */
+header .idblock { margin: -12px 0 18px; }
+header .motto {
+  margin: -8px 0 20px;
+  font-style: italic;
+}
+header .status { margin: 0 0 6px; }
+header .links { margin: 0 0 20px; }
+header .links .sep { color: $muted; }
 
 .idblock {
-  margin: -14px 0 16px;
-  color: #555555;
+  color: $text;
   font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, Consolas, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
   font-size: 12px;
   line-height: 1.7;
 }
-.idblock .k { color: #8a8a8a; }
+.idblock .k { color: $muted; }
 
 .status {
-  color: #555555;
+  color: $muted;
   font-size: 13px;
 }
 .status .dot {
@@ -24,13 +83,13 @@
   height: 8px;
   margin-right: 8px;
   border-radius: 50%;
-  background: #1ba48d;
-  box-shadow: 0 0 0 3px rgba(27, 164, 141, 0.18);
+  background: $ok;
+  box-shadow: 0 0 0 3px rgba(27, 164, 141, 0.22);
   vertical-align: 1px;
 }
 
 .head {
-  color: #222222;
+  color: $ink;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
@@ -38,7 +97,7 @@
 
 .flag {
   margin: 32px 0 0;
-  color: #12806d;
+  color: $link;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -51,12 +110,22 @@
   display: inline-block;
   margin: 0 3px 6px 0;
   padding: 1px 7px;
-  border: 1px solid #e3e8ec;
+  border: 1px solid $line;
   border-radius: 4px;
-  background: #f4f7f9;
-  color: #333333;
+  background: $raised;
+  color: $ink;
   font-size: 11.5px;
   line-height: 1.6;
   white-space: nowrap;
 }
 .stack li { margin-bottom: 4px; }
+
+/* Printing drops the dark background, so print dark text on white paper. */
+@media print {
+  :root { color-scheme: light; }
+  body { background-color: #FFFFFF; color: #444444; }
+  h1, h2, h3, h4, h5, h6, strong, dt, th, .head, code, pre { color: #222222; }
+  a, .flag { color: #267CB9; }
+  small, footer, .status, .idblock, .idblock .k { color: #555555; }
+  .tags code, .stack code, pre { background: #FFFFFF; border-color: #CCCCCC; }
+}

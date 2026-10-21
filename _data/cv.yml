@@ -127,6 +127,7 @@ certifications:
   - name: "Cisco Certified Specialist (Enterprise)"
     issuer: "Cisco"
     date: "Jul 2023"
+    url: "https://www.credly.com/badges/52465f7d-ecf4-42b1-a696-170059bb1f92"
 
 footer:
   - label: "GitHub"

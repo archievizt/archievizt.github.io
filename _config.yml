@@ -1,4 +1,5 @@
-# Site identity. The title and description show in the left sidebar.
+# Site identity. The title shows at the top of the left sidebar. The
+# description is not shown on the page: search engines and link previews use it.
 title: Archie Abeleda
 tagline: Network and Security Specialist
 description: >-
@@ -10,8 +11,30 @@ lang: en-CA
 url: https://archievizt.github.io
 baseurl: ""
 
-# The sidebar "View My GitHub Profile" link.
-github_username: archievizt
+# The rest of the left sidebar, under the title, in this order: the ID lines,
+# the intro, the status line and the links. To show a quote after the intro,
+# add a line such as  motto: "Paranoid by trade, boring by design."
+# Rules:
+# - Keep every value in double quotes, and never type a double quote inside one.
+# - Plain text only. Any HTML is escaped and shows as text.
+# - Links must start with https://, mailto:, or / (a page on this site).
+#   Anything else (http://, javascript:) shows as plain text, not a link.
+# - Delete a line to hide it. Delete a "- label" line and its "url" line to drop a link.
+sidebar:
+  id: "Armando Abeleda Jr."
+  run_as: "Archie"
+  intro: "Over a decade keeping high-stakes networks locked down and online. Belt and braces on every layer. Now I point the same paranoia at my own kit."
+  status: "Systems operational"
+  links:
+    - label: "CV"
+      url: "/cv.html"
+    - label: "GitHub"
+      url: "https://github.com/archievizt"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/ajrabeleda"
+    - label: "Email"
+      url: "mailto:hello@archieabeleda.dev"
+
 social:
   name: Archie Abeleda
   links:
