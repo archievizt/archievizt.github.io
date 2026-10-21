@@ -1,0 +1,135 @@
+# Everything on /cv.html comes from this file. Edit here, not in the layout.
+# Rules:
+# - Keep every value in double quotes, and never type a double quote inside one.
+# - Indent with spaces, never tabs.
+# - Plain text only. Any HTML is escaped and shows as text.
+# - Links must start with https://, mailto:, or / (a page on this site).
+#   Anything else (http://, javascript:) shows as plain text, not a link.
+# - This file is public. No phone number, home address, or personal email.
+
+name: "Armando Abeleda Jr."
+title: "Network and Security Specialist"
+motto: "Paranoid by trade, boring by design."
+location: "British Columbia, Canada"
+
+links:
+  - label: "archievizt.github.io"
+    url: "https://archievizt.github.io"
+  - label: "github.com/archieabeleda"
+    url: "https://github.com/archieabeleda"
+  - label: "linkedin.com/in/ajrabeleda"
+    url: "https://www.linkedin.com/in/ajrabeleda"
+
+summary:
+  - "Network and Security Specialist working since 2015 across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. Most of that time has gone into segmentation, firewall policy, and change control, and into coordinating the network side when something breaks anyway."
+  - "Day to day that means Palo Alto and Cisco, multi-vendor wireless, and Python and Ansible for the repetitive work. Anything new goes through a lab first, and AI gets read access, never write."
+
+experience:
+  - role: "Network Administrator"
+    org: "Primacorp Ventures Inc."
+    dates: "Jun 2023 to Present"
+    summary: "Network Operation Support, New Westminster, BC. 700+ devices across 40+ sites in five provinces and four time zones."
+    bullets:
+      - "Designed and implemented the data centre re-segmentation on a high-speed Catalyst core, replacing grouped Palo Alto security zones with a zone per subnet and VRF transit from the core to the firewall."
+      - "Designed and built network and security for new campus sites, from topology planning with stakeholders to switch and router deployment, with edge routers on the provider-managed SD-WAN."
+      - "Took part in onboarding nine acquired senior living sites: security policy review before turnover, a separate domain built to the campus design, then cutover one site at a time once approved."
+      - "Built open-source monitoring with Checkmk, Prometheus, and Grafana when there was no working NMS, ran on it for about a year, then moved polling to a commercial platform."
+      - "Look after multi-vendor wireless (300+ Cisco, 200+ Juniper Mist, and 65 HPE Aruba access points), including RF site assessments, with 802.1X on every campus."
+      - "Cover voice as part of the network role: voice VLANs, QoS, PoE for IP phones, and call routing and SIP in Cisco CUCM on VMware vSphere."
+      - "Automate repetitive device configuration with Python and Ansible, and test changes in EVE-NG before they reach production."
+
+  - role: "Lead Engineer, Network and Security"
+    org: "Marina Bay Sands Pte. Ltd."
+    dates: "Dec 2018 to Mar 2023"
+    summary: "Singapore. An integrated resort: hotel, gaming floor, retail, and convention centre, on ten firewalled backbones including Data, Gaming, Facility, AV, Guest, and DMZ."
+    bullets:
+      - "Took three to five firewall changes a week through CAB on a multi-vsys Palo Alto HA cluster managed from Panorama, with a platform snapshot before every change."
+      - "Recertified a firewall rule base of 1,600+ rules in AlgoSec ahead of a PCI DSS audit, and worked with the compliance team on the PCI backbone audit, covering access control, segmentation, user access reviews, and firewall encryption settings."
+      - "Coordinated the network side of major incident bridges, bringing in Cisco high-touch engineers and feeding network findings into regulator-mandated RCAs for gaming floor and surveillance faults."
+      - "Pulled off the shift rota for project work: aligned device configuration to the solution architect's design for the 2022 core switch and firewall refresh, and managed vendor contractors on a biometric access migration."
+      - "Applied the network hardening standard across core, distribution, and access switches: SSH with VTY access lists, SNMPv3, control plane policing, DHCP snooping, BPDU guard, and unused port shutdown."
+      - "Handled the network and security section of the annual DR exercise, which cut live production traffic over to the backup data centre."
+      - "Coached engineers until they handled Tier 2 and Tier 3 work on their own."
+
+  - role: "Senior Network Engineer, then Shift Infrastructure Engineer"
+    org: "Optimum Solutions Pte. Ltd."
+    dates: "Jul 2015 to Dec 2018"
+    summary: "Deployed to Marina Bay Sands, first on the surveillance network migration, then on 24/7 shift operations."
+    bullets:
+      - "Prepared each area of the surveillance migration with configuration review and burn-in testing, migrated devices, and assisted the Cisco engineering team on the multicast CCTV cutover."
+      - "Worked on the firewall migration: some legacy Check Point firewalls moved to Palo Alto with the rule base validated either side of cutover, and the rest were upgraded and brought under Check Point Multi-Domain Security Management."
+      - "Took part in adding a live gaming service to the table games backbone, from requirements and stakeholder meetings through to a new VLAN, subnet, and security zone."
+      - "Worked in Aruba ClearPass Policy Manager on enforcement policies, AD group role mapping, and RADIUS clients for the Aruba wireless controllers."
+
+  - role: "Network Engineer"
+    org: "TechnoPals Pte. Ltd."
+    dates: "May 2015 to Jul 2015"
+    bullets:
+      - "Deployed to NCS Pte. Ltd. to support the network for the 2015 SEA Games in Singapore."
+
+projects:
+  - name: "netops-automation"
+    url: "https://github.com/archieabeleda/netops-automation"
+    kind: "Open source"
+    description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
+  - name: "EVPN fabric with external L3Out"
+    url: "https://github.com/archieabeleda/evpn-vxlan-l3out-lab"
+    kind: "Lab"
+    description: "Seven nodes in EVE-NG: Nexus 9300v spines as iBGP route reflectors over an OSPF underlay, border leaves handing each tenant to an IOS-XE router on its own VRF-Lite eBGP session, and a 15-point runbook through live border failover. Later extended with k3s, Cilium, and FRR peering eBGP into a leaf."
+  - name: "Hybrid cloud"
+    kind: "Lab"
+    description: "Proxmox home lab to Google Cloud over HA VPN, with two IPsec tunnels and eBGP to Cloud Router, terminated on OPNsense and VyOS side by side. The Google Cloud side is moving into Terraform."
+  - name: "Cisco Catalyst SD-WAN"
+    kind: "Lab"
+    description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."
+  - name: "Local AI node"
+    kind: "Lab"
+    description: "Ollama, Open WebUI, and Qdrant in the home lab, for research into local LLMs that watch a network without touching it."
+  - name: "Previous portfolio site"
+    kind: "Personal"
+    description: "Static site on Firebase Hosting with a strict content security policy, deployed from GitHub Actions through Workload Identity Federation, so there are no service account keys to leak."
+
+writing:
+  - title: "netops-automation field report"
+    url: "https://archieabeleda.github.io/netops-automation/"
+    source: "archieabeleda.github.io"
+
+skills:
+  - area: "Network"
+    items: "Cisco Catalyst and Nexus, HPE Comware and ProVision, VLAN and VRF design, OSPF, BGP, EVPN-VXLAN (lab), SD-WAN (provider-managed in production, Cisco Catalyst in the lab), multi-vendor wireless, RF site assessment, voice on Cisco CUCM"
+  - area: "Security"
+    items: "Palo Alto (Panorama, HA, multi-vsys), Check Point Multi-Domain Security Management, AlgoSec, segmentation, 802.1X, EAP-TLS, RADIUS (Aruba ClearPass), TACACS+ (Cisco ISE), device hardening, remote access VPN, EDR console administration, vulnerability scanning, PCI DSS audit support"
+  - area: "Cloud"
+    items: "Google Cloud networking in the lab (HA VPN, Cloud Router, eBGP), Terraform, Firebase Hosting, Workload Identity Federation"
+  - area: "Infrastructure"
+    items: "VMware vSphere and Proxmox for network workloads, Checkmk, Prometheus, Grafana, SNMP, Active Directory, Microsoft 365 user administration, PowerShell, change control, DR exercises"
+  - area: "Automation and AI"
+    items: "Python (Netmiko, Typer, pytest), Ansible, Git, GitHub Actions, NetBox, EVE-NG, local LLMs (Ollama, Open WebUI, Qdrant)"
+
+education:
+  - degree: "B.Sc., Electronics and Communications Engineering"
+    school: "Technological Institute of the Philippines, Manila"
+    date: "Oct 2008"
+
+certifications:
+  - name: "CISSP"
+    issuer: "ISC2"
+    date: "Apr 2026"
+    url: "https://www.credly.com/badges/00c78370-a452-4af7-bec9-78c4dd4a7720"
+  - name: "CCSP"
+    issuer: "ISC2"
+    date: "Jul 2026"
+    url: "https://www.credly.com/badges/651c7d74-5b6c-49fd-997b-9a498aa21085"
+  - name: "Cisco Certified Specialist (Security)"
+    issuer: "Cisco"
+    date: "Jul 2023"
+    url: "https://www.credly.com/badges/cd480174-94f9-4bbc-83a9-6b7c5ceb7ab5"
+  - name: "Cisco Certified Specialist (Enterprise)"
+    issuer: "Cisco"
+    date: "Jul 2023"
+
+footer:
+  - label: "GitHub"
+    url: "https://github.com/archieabeleda"
+  - label: "LinkedIn"
+    url: "https://www.linkedin.com/in/ajrabeleda"

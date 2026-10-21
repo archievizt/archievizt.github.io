@@ -1,0 +1,183 @@
+/* CV page styles. Uses the Noto Sans files that ship with the Minimal theme. */
+
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Noto-Sans-regular/Noto-Sans-regular.woff2") format("woff2"),
+       url("../fonts/Noto-Sans-regular/Noto-Sans-regular.woff") format("woff");
+}
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Noto-Sans-700/Noto-Sans-700.woff2") format("woff2"),
+       url("../fonts/Noto-Sans-700/Noto-Sans-700.woff") format("woff");
+}
+@font-face {
+  font-family: "Noto Sans";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Noto-Sans-italic/Noto-Sans-italic.woff2") format("woff2"),
+       url("../fonts/Noto-Sans-italic/Noto-Sans-italic.woff") format("woff");
+}
+@font-face {
+  font-family: "Noto Sans";
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/Noto-Sans-700italic/Noto-Sans-700italic.woff2") format("woff2"),
+       url("../fonts/Noto-Sans-700italic/Noto-Sans-700italic.woff") format("woff");
+}
+
+:root {
+  --ink: #1f1f1f;
+  --body: #3a3a3a;
+  --soft: #5c5c5c;
+  --faint: #8c8c8c;
+  --rule: #222222;
+  --hair: #e4e4e4;
+  --link: #267cb9;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: var(--body);
+  font: 14px/1.6 "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.cv {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 52px 20px 40px;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+
+/* Header */
+h1 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.cv-title { margin: 0; color: var(--ink); }
+.cv-motto { margin: 2px 0 0; color: var(--faint); font-size: 13px; font-style: italic; }
+.cv-contact { margin: 12px 0 0; color: var(--soft); font-size: 13px; }
+.cv-contact a { color: var(--soft); }
+.sep { padding-left: 4px; margin-right: 4px; color: #c2c2c2; }
+
+.cv-summary { margin-top: 24px; }
+.cv-summary p { margin: 0 0 10px; }
+
+/* Sections */
+h2 {
+  margin: 34px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.entry { margin: 0 0 18px; break-inside: avoid; }
+.entry.tight { margin-bottom: 12px; }
+
+/* Title on the left wraps in its own column; the date stays top right. */
+.entry-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 16px;
+}
+
+h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+h3.plain { font-weight: 400; }
+h3 a { color: var(--ink); }
+h3.plain a { color: var(--link); }
+.org { color: var(--soft); font-weight: 400; }
+
+.when { color: var(--faint); font-size: 12px; white-space: nowrap; }
+
+.entry-sub { margin: 3px 0 6px; }
+.entry ul { margin: 6px 0 0; padding-left: 18px; }
+.entry li { margin: 3px 0; }
+
+.source { margin: 0; color: var(--faint); font-size: 12px; }
+
+/* Skills */
+table.skills { width: 100%; border-collapse: collapse; }
+.skills th {
+  width: 150px;
+  padding: 5px 16px 5px 0;
+  color: var(--ink);
+  font-weight: 700;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.skills td { padding: 5px 0; vertical-align: top; }
+
+/* Footer */
+.cv-foot {
+  margin-top: 40px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hair);
+  color: var(--faint);
+  font-size: 12px;
+}
+.cv-foot a { color: var(--soft); }
+
+/* Phones */
+@media (max-width: 560px) {
+  .cv { padding-top: 32px; }
+  .cv-contact .item { display: block; }
+  .cv-contact .sep { display: none; }
+  .entry-head { grid-template-columns: minmax(0, 1fr); }
+  .skills tr, .skills th, .skills td { display: block; width: auto; }
+  .skills th { padding: 6px 0 0; }
+  .skills td { padding: 0 0 6px; }
+}
+
+/* Print: browser "Save as PDF" gives a clean, tighter CV */
+@media print {
+  @page { margin: 12mm 13mm; }
+  body { color: #000000; font-size: 8.8pt; line-height: 1.38; }
+  .cv { max-width: none; padding: 0; }
+  a, h3 a, h3.plain a, .cv-contact a { color: inherit; }
+  h1 { font-size: 15pt; margin-bottom: 1pt; }
+  h2 { margin: 11pt 0 6pt; padding-bottom: 3pt; font-size: 7.5pt; break-after: avoid; }
+  h3 { font-size: 9.2pt; }
+  .cv-motto, .cv-contact { font-size: 8.3pt; }
+  .cv-contact { margin-top: 5pt; }
+  .cv-summary { margin-top: 9pt; }
+  .cv-summary p { margin-bottom: 4pt; }
+  .when, .source { font-size: 8pt; }
+  .entry { margin-bottom: 7pt; break-inside: auto; }
+  .entry.tight { margin-bottom: 5pt; }
+  .entry-head { break-after: avoid; }
+  .entry-sub { margin: 1pt 0 2pt; }
+  .entry ul { margin-top: 2pt; padding-left: 13pt; }
+  .entry li { margin: 0; break-inside: avoid; }
+  .skills th { width: 105pt; padding: 1.5pt 10pt 1.5pt 0; }
+  .skills td { padding: 1.5pt 0; }
+  .cv-foot { display: none; }
+}

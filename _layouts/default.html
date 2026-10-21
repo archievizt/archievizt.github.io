@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+  Minimal theme layout by orderedlist (pages-themes/minimal v0.2.0, CC0).
+  Local copy with these changes: a Content Security Policy
+  (_includes/security-headers.html), no JavaScript, the profile link taken
+  from github_username in _config.yml, a build-time cache-buster for the
+  stylesheet, and a full stop in the footer.
+-->
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    {% include security-headers.html %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% seo %}
+    {% assign build_stamp = site.time | date: '%s' %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: build_stamp | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="{{ "/" | absolute_url }}">{{ site.title | xml_escape }}</a></h1>
+
+        {% if site.logo %}
+          <img src="{{ site.logo | relative_url }}" alt="Logo" />
+        {% endif %}
+
+        <p>{{ site.description | xml_escape }}</p>
+
+        {% if site.github_username %}
+        <p class="view"><a href="https://github.com/{{ site.github_username | uri_escape }}">View My GitHub Profile</a></p>
+        {% endif %}
+      </header>
+      <section>
+
+      {{ content }}
+
+      </section>
+      <footer>
+        <p><small>Hosted on GitHub Pages. Theme by <a href="https://github.com/orderedlist">orderedlist</a>.</small></p>
+      </footer>
+    </div>
+  </body>
+</html>

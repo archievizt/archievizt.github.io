@@ -1,0 +1,38 @@
+# Site identity. The title and description show in the left sidebar.
+title: Archie Abeleda
+tagline: Network and Security Specialist
+description: >-
+  Network and Security Specialist. Over a decade on high-stakes networks,
+  plus a home lab where local AI gets read access only.
+author: Archie Abeleda
+lang: en-CA
+
+url: https://archievizt.github.io
+baseurl: ""
+
+# The sidebar "View My GitHub Profile" link. Your repositories live under
+# archieabeleda today; change this if you move them to archievizt.
+github_username: archieabeleda
+social:
+  name: Archie Abeleda
+  links:
+    - https://github.com/archieabeleda
+    - https://www.linkedin.com/in/ajrabeleda
+
+# Same theme as the reference site. GitHub Pages builds it natively.
+theme: jekyll-theme-minimal
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Repo housekeeping that should not end up on the site. Jekyll also skips
+# anything starting with a dot (.env, .env.example, .gitignore) by default.
+exclude:
+  - README.md
+  - SECURITY.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - .jekyll-cache

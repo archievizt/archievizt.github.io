@@ -1,0 +1,22 @@
+{%- comment -%}
+  Link allowlist for links that come from data files such as _data/cv.yml.
+
+  Returns the link, HTML-escaped, only when it starts with https:// or
+  mailto:, or with a single / (a page on this site). Anything else, such as
+  http://, javascript:, data:, or //other-host, returns nothing, and the
+  layout then shows the label as plain text instead of a link.
+
+  Used by capturing its output with url set to the value to check; see
+  _layouts/cv.html.
+{%- endcomment -%}
+{%- assign safe_url_raw = include.url | default: "" | strip -%}
+{%- assign safe_url_lower = safe_url_raw | downcase -%}
+{%- assign safe_url_head8 = safe_url_lower | slice: 0, 8 -%}
+{%- assign safe_url_head7 = safe_url_lower | slice: 0, 7 -%}
+{%- assign safe_url_head1 = safe_url_raw | slice: 0, 1 -%}
+{%- assign safe_url_head2 = safe_url_raw | slice: 0, 2 -%}
+{%- if safe_url_head8 == "https://" or safe_url_head7 == "mailto:" -%}
+  {{- safe_url_raw | escape -}}
+{%- elsif safe_url_head1 == "/" and safe_url_head2 != "//" -%}
+  {{- safe_url_raw | relative_url | escape -}}
+{%- endif -%}

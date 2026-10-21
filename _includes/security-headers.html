@@ -1,0 +1,12 @@
+{%- comment -%}
+  Security policy for every page, used by both layouts.
+
+  GitHub Pages cannot send custom HTTP headers, so the Content Security Policy
+  is set here as a meta tag. The site loads only its own styles and fonts and
+  runs no JavaScript, so anything injected (an inline script, a javascript:
+  link, an outside image or frame, a form) is refused by the browser.
+  frame-ancestors and report-uri only work as real headers, so they are left
+  out. To add a script or an outside service later, allow it here first.
+{%- endcomment -%}
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">

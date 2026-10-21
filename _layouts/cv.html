@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+  CV layout. Content lives in _data/cv.yml, styles in assets/css/cv.css.
+  Every value from cv.yml is HTML-escaped before it reaches the page
+  (xml_escape, with apostrophes turned into ’), and every link goes through
+  _includes/safe-url.html, which only lets https://, mailto:, and
+  site-relative (/...) links through. Anything else shows as plain text.
+-->
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    {% include security-headers.html %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% seo %}
+    {% assign build_stamp = site.time | date: '%s' %}
+    <link rel="stylesheet" href="{{ "/assets/css/cv.css?v=" | append: build_stamp | relative_url }}">
+  </head>
+  <body>
+    {% assign cv = site.data.cv %}
+    <main class="cv">
+
+      <header class="cv-head">
+        <h1>{{ cv.name | xml_escape | replace: "&apos;", "’" }}</h1>
+        <p class="cv-title">{{ cv.title | xml_escape | replace: "&apos;", "’" }}</p>
+        {% if cv.motto %}<p class="cv-motto">“{{ cv.motto | xml_escape | replace: "&apos;", "’" }}”</p>{% endif %}
+        {%- comment -%}
+          Separators carry a non-breaking space on their left, so a wrapped line
+          never starts with a dot. On phones the items stack and the dots hide.
+        {%- endcomment -%}
+        <p class="cv-contact">
+          {%- if cv.location -%}<span class="item">{{ cv.location | xml_escape | replace: "&apos;", "’" }}</span>{%- endif -%}
+          {%- for l in cv.links -%}
+            {%- if forloop.first == false or cv.location -%}<span class="sep" aria-hidden="true">&nbsp;·</span> {% endif -%}
+            {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
+            {%- assign href = href | strip -%}
+            {%- if href != "" -%}<a class="item" href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- else -%}<span class="item">{{ l.label | xml_escape | replace: "&apos;", "’" }}</span>{%- endif -%}
+          {%- endfor -%}
+          {%- assign pdf = site.static_files | where: "path", "/assets/cv.pdf" | first -%}
+          {%- if pdf -%}<span class="sep" aria-hidden="true">&nbsp;·</span> <a class="item" href="{{ pdf.path | relative_url }}">PDF</a>{%- endif -%}
+        </p>
+      </header>
+
+      {% if cv.summary %}
+      <section class="cv-summary">
+        {% for p in cv.summary %}<p>{{ p | xml_escape | replace: "&apos;", "’" }}</p>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      <section>
+        <h2>Experience</h2>
+        {% for job in cv.experience %}
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{{ job.role | xml_escape | replace: "&apos;", "’" }} <span class="org">· {{ job.org | xml_escape | replace: "&apos;", "’" }}</span></h3>
+            <span class="when">{{ job.dates | xml_escape | replace: "&apos;", "’" }}</span>
+          </div>
+          {% if job.summary %}<p class="entry-sub">{{ job.summary | xml_escape | replace: "&apos;", "’" }}</p>{% endif %}
+          {% if job.bullets %}
+          <ul>
+            {% for b in job.bullets %}<li>{{ b | xml_escape | replace: "&apos;", "’" }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </article>
+        {% endfor %}
+      </section>
+
+      {% if cv.projects %}
+      <section>
+        <h2>Projects</h2>
+        {% for p in cv.projects %}
+        {%- capture href -%}{%- include safe-url.html url=p.url -%}{%- endcapture -%}
+        {%- assign href = href | strip %}
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{% if href != "" %}<a href="{{ href }}">{{ p.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ p.name | xml_escape | replace: "&apos;", "’" }}{% endif %}</h3>
+            <span class="when">{{ p.kind | xml_escape | replace: "&apos;", "’" }}</span>
+          </div>
+          <p class="entry-sub">{{ p.description | xml_escape | replace: "&apos;", "’" }}</p>
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.writing %}
+      <section>
+        <h2>Writing</h2>
+        {% for w in cv.writing %}
+        {%- capture href -%}{%- include safe-url.html url=w.url -%}{%- endcapture -%}
+        {%- assign href = href | strip %}
+        <article class="entry tight">
+          <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ w.title | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ w.title | xml_escape | replace: "&apos;", "’" }}{% endif %}</h3>
+          <p class="source">{{ w.source | xml_escape | replace: "&apos;", "’" }}</p>
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.skills %}
+      <section>
+        <h2>Skills</h2>
+        <table class="skills">
+          {% for s in cv.skills %}<tr><th scope="row">{{ s.area | xml_escape | replace: "&apos;", "’" }}</th><td>{{ s.items | xml_escape | replace: "&apos;", "’" }}</td></tr>
+          {% endfor %}
+        </table>
+      </section>
+      {% endif %}
+
+      {% if cv.education %}
+      <section>
+        <h2>Education</h2>
+        {% for e in cv.education %}
+        <article class="entry">
+          <div class="entry-head">
+            <h3>{{ e.degree | xml_escape | replace: "&apos;", "’" }} <span class="org">· {{ e.school | xml_escape | replace: "&apos;", "’" }}</span></h3>
+            <span class="when">{{ e.date | xml_escape | replace: "&apos;", "’" }}</span>
+          </div>
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      {% if cv.certifications %}
+      <section>
+        <h2>Certifications</h2>
+        {% for c in cv.certifications %}
+        {%- capture href -%}{%- include safe-url.html url=c.url -%}{%- endcapture -%}
+        {%- assign href = href | strip %}
+        <article class="entry tight">
+          <div class="entry-head">
+            <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ c.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ c.name | xml_escape | replace: "&apos;", "’" }}{% endif %}</h3>
+            <span class="when">{{ c.date | xml_escape | replace: "&apos;", "’" }}</span>
+          </div>
+          <p class="source">{{ c.issuer | xml_escape | replace: "&apos;", "’" }}</p>
+        </article>
+        {% endfor %}
+      </section>
+      {% endif %}
+
+      <footer class="cv-foot">
+        <a href="{{ "/" | relative_url }}">Home</a>
+        {%- for l in cv.footer -%}
+          {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
+          {%- assign href = href | strip -%}
+          <span class="sep" aria-hidden="true">&nbsp;·</span> {% if href != "" %}<a href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ l.label | xml_escape | replace: "&apos;", "’" }}{% endif %}
+        {%- endfor -%}
+      </footer>
+
+    </main>
+  </body>
+</html>
