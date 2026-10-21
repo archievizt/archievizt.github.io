@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Archie Abeleda
+tab_title: "Archie Abeleda | Portfolio"
 ---
 
 ## About
@@ -19,12 +20,12 @@ Lately my off hours go to pointing AI at the network. A home lab where local mod
 
 ### How I work
 
-- **Automation that fires itself.** Python and Ansible doing the repetitive graft, so I never babysit a CLI for it again.
+- **Automation that runs itself.** Python and Ansible handle the toil, so I never babysit a CLI for the same task twice.
 - **Self-hosted AI.** Local models on my own hardware, tuned where the cloud can't watch. Nothing leaves the house.
+- **Triage agent, human call.** I'm building an on-call agent that takes a Grafana alert, gathers evidence with read-only tools and writes up a triage note. A person still makes the call.
+- **Hybrid cloud.** My home lab reaches Google Cloud over two IPsec tunnels with BGP on top. The cloud side is moving into Terraform, one imported resource at a time.
 - **Aggressive segmentation.** Every segment walled off from the rest. Default-deny or it didn't happen.
-- **Breaking my own lab.** I break my own lab before anyone else can, because that's the whole point. Better a quiet Tuesday than a Friday night.
-
-Off the clock, I'm usually getting choked out on a jiu-jitsu mat, somewhere in the backcountry with a tent, or reading Stoics who would not approve of my screen time.
+- **Breaking my own lab.** I go looking for the weak spots before anyone else does. Better a quiet Tuesday than a Friday night.
 
 ---
 
@@ -75,15 +76,17 @@ More labs, including the hybrid cloud build, are on the [CV]({{ '/cv.html' | rel
 
 ---
 
-## Tech stack
+## Infrastructure & security stack
 
 The tools that earn their keep.
 {: .head}
 
-Over a decade of enterprise kit, plus the self-hosted AI stack I run at home. Grouped by what it does.
+Over a decade of enterprise kit, plus the AI and hybrid cloud labs I run at home. Grouped by what it does.
 
 - **Network & Security:** `Cisco` `Palo Alto` `Check Point` `Zscaler ZIA` `F5 BIG-IP APM`
 - **Perimeter & Access:** `SD-WAN` `IDS / IPS` `NAC` `VPN (IPsec)`
+- **Cloud Networking:** `Google Cloud VPC` `HA VPN` `Cloud Router` `eBGP` `Terraform` `Workload Identity Federation`
+- **Monitoring & Observability:** `Checkmk` `Prometheus` `Grafana` `Dynatrace` `Splunk` `SolarWinds`
 - **Automation:** `Python` `Ansible` `Scrapli` `Netmiko` `Git` `REST APIs`
 - **Platforms:** `CentOS` `Ubuntu` `Proxmox VE` `Firebase Hosting`
 - **AI Stack:** `Ollama` `Qwen3` `Gemma 4` `nomic-embed-text` `Qdrant` `RAG` `Open WebUI` `OpenClaw` `Gradio`

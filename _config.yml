@@ -11,9 +11,10 @@ lang: en-CA
 url: https://archievizt.github.io
 baseurl: ""
 
-# The rest of the left sidebar, under the title, in this order: the ID lines,
-# the intro, the status line and the links. To show a quote after the intro,
-# add a line such as  motto: "Paranoid by trade, boring by design."
+# The rest of the left sidebar, under the title, in this order: the intro, the
+# links and the status line. Optional extras:
+#   ID lines under the title:  id: "Armando Abeleda Jr."  and  run_as: "Archie"
+#   a quote after the intro:   motto: "Paranoid by trade, boring by design."
 # Rules:
 # - Keep every value in double quotes, and never type a double quote inside one.
 # - Plain text only. Any HTML is escaped and shows as text.
@@ -21,10 +22,8 @@ baseurl: ""
 #   Anything else (http://, javascript:) shows as plain text, not a link.
 # - Delete a line to hide it. Delete a "- label" line and its "url" line to drop a link.
 sidebar:
-  id: "Armando Abeleda Jr."
-  run_as: "Archie"
   intro: "Over a decade keeping high-stakes networks locked down and online. Belt and braces on every layer. Now I point the same paranoia at my own kit."
-  status: "Systems operational"
+  status: "Systems Operational"
   links:
     - label: "CV"
       url: "/cv.html"

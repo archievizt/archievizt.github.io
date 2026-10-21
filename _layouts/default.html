@@ -3,11 +3,15 @@
   Minimal theme layout by orderedlist (pages-themes/minimal v0.2.0, CC0).
   Local copy with these changes: a Content Security Policy
   (_includes/security-headers.html), no JavaScript, a sidebar built from
-  the sidebar settings in _config.yml (ID lines, intro, optional motto,
-  status, links) in place of the description and the "View My GitHub
+  the sidebar settings in _config.yml (optional ID lines, intro, optional
+  motto, links, status) in place of the description and the "View My GitHub
   Profile" link, a build-time cache-buster for the stylesheet, and a full
   stop in the footer. The description in _config.yml is not shown on the
   page; jekyll-seo-tag uses it for search engines and link previews.
+  The browser tab title is the page's tab_title: line, as written, and
+  jekyll-seo-tag is told not to add its own (title=false). Link previews
+  still use the page's title: line, which must not contain a "|", because
+  jekyll-seo-tag reads it as Markdown and turns a "|" into a table.
 
   Every sidebar value is HTML-escaped (xml_escape, with apostrophes turned
   into ’), and every sidebar link goes through _includes/safe-url.html, so
@@ -18,8 +22,8 @@
     <meta charset="UTF-8">
     {% include security-headers.html %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-{% seo %}
+    <title>{{ page.tab_title | default: page.title | default: site.title | xml_escape }}</title>
+{% seo title=false %}
     {% assign build_stamp = site.time | date: '%s' %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: build_stamp | relative_url }}">
     {% include head-custom.html %}
@@ -50,10 +54,6 @@
         <p class="motto">“{{ sb.motto | xml_escape | replace: "&apos;", "’" }}”</p>
         {%- endif %}
 
-        {% if sb.status -%}
-        <p class="status"><span class="dot" aria-hidden="true"></span>{{ sb.status | xml_escape | replace: "&apos;", "’" }}</p>
-        {%- endif %}
-
         {%- comment -%}
           Separators carry a non-breaking space on their left, so a wrapped
           line never starts with a dot.
@@ -67,6 +67,10 @@
             {%- if href != "" -%}<a href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- else -%}{{ l.label | xml_escape | replace: "&apos;", "’" }}{%- endif -%}
           {%- endfor -%}
         </p>
+        {%- endif %}
+
+        {% if sb.status -%}
+        <p class="status"><span class="dot" aria-hidden="true"></span>{{ sb.status | xml_escape | replace: "&apos;", "’" }}</p>
         {%- endif %}
       </header>
       <section>

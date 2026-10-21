@@ -11,7 +11,8 @@
     <meta charset="UTF-8">
     {% include security-headers.html %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
-{% seo %}
+    <title>{{ page.tab_title | default: page.title | default: site.title | xml_escape }}</title>
+{% seo title=false %}
     {% assign build_stamp = site.time | date: '%s' %}
     <link rel="stylesheet" href="{{ "/assets/css/cv.css?v=" | append: build_stamp | relative_url }}">
   </head>

@@ -55,14 +55,14 @@ hr { background: $line; }
   section { border-color: $line; }
 }
 
-/* Sidebar: ID lines under the title, then the intro, status and links. */
+/* Sidebar: optional ID lines under the title, then the intro, links and status. */
 header .idblock { margin: -12px 0 18px; }
 header .motto {
   margin: -8px 0 20px;
   font-style: italic;
 }
-header .status { margin: 0 0 6px; }
-header .links { margin: 0 0 20px; }
+header .links { margin: 0 0 8px; }
+header .status { margin: 0 0 20px; }
 header .links .sep { color: $muted; }
 
 .idblock {
