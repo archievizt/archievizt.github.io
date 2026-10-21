@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>netops-automation: Field Report</title>
+<meta name="description" content="Four network automation tools on one inventory and connection layer: config backup and drift detection, change validation, STIG auditing, and IPAM sync.">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead reveal r1">
+    <span class="mono">netops-automation &middot; <span class="accent">field report</span></span>
+    <!-- EDIT: change the date to when you publish -->
+    <span class="mono">Issue 01 &middot; 2026</span>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <div class="hero reveal r2">
+    <span class="mono">Project dossier</span>
+    <h1>Four network tools that share one source of truth.</h1>
+    <p class="deck">Config backup, change validation, STIG auditing, and IPAM sync,
+      built on a single inventory and connection layer, so multi-vendor networks stay
+      consistent, auditable, and boring in the best possible way.</p>
+
+    <div class="stats">
+      <div class="stat"><b>4</b><span class="mono">Tools</span></div>
+      <div class="stat"><b>1</b><span class="mono">Shared layer</span></div>
+      <div class="stat"><b>Multi</b><span class="mono">Vendor</span></div>
+      <div class="stat"><b>MIT</b><span class="mono">License</span></div>
+    </div>
+  </div>
+
+  <!-- ============ CONTENTS ============ -->
+  <nav class="contents reveal r3" aria-label="In this report">
+    <span class="mono">In this report</span>
+    <ul>
+      <li><a href="#what">What it does</a></li>
+      <li><a href="#toolkit">The toolkit</a></li>
+      <li><a href="#fits">How it fits together</a></li>
+      <li><a href="#built">Built with</a></li>
+      <li><a href="#get">Get the code</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ 01 WHAT IT DOES ============ -->
+  <section id="what">
+    <div class="mono sec-label">Section 01</div>
+    <h2>What it does</h2>
+    <p class="lead">Networks drift. Someone makes a change on a switch at 2am, nobody
+      writes it down, and three weeks later the running config no longer matches what
+      anyone thinks is deployed. Audits get done by hand. The "source of truth" lives
+      in a spreadsheet that went stale months ago.</p>
+    <p>netops-automation is a small toolkit that attacks that problem from four angles
+      at once. Every tool reads the same device inventory and talks to gear over the
+      same connection layer, so you describe your network once and reuse it everywhere.
+      It's aimed at multi-vendor labs and internal networks where you want change to be
+      tracked, reviewable, and safe to roll back, without buying a heavyweight
+      platform to get there.</p>
+  </section>
+
+  <!-- ============ 02 THE TOOLKIT ============ -->
+  <section id="toolkit">
+    <div class="mono sec-label">Section 02</div>
+    <h2>The toolkit</h2>
+
+    <div class="tool">
+      <div class="num">1</div>
+      <div>
+        <h3>Config backup &amp; drift detection</h3>
+        <p>Pulls the running config from every device and commits it to Git on a
+          schedule. When a config changes, you get a clean diff of exactly what moved,
+          so unplanned changes surface instead of hiding.</p>
+        <div class="tags mono">
+          <span class="tag"><em>does</em> pull configs, commit to git</span>
+          <span class="tag"><em>catches</em> untracked changes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">2</div>
+      <div>
+        <h3>Pre / post change validation</h3>
+        <p>Snapshots the state that matters (reachability, interfaces, routing, whatever
+          you define) before a change and again after. If something you didn't intend to
+          touch moved, it tells you before you walk away thinking the job's done.</p>
+        <div class="tags mono">
+          <span class="tag"><em>does</em> capture state, compare</span>
+          <span class="tag"><em>catches</em> side effects of a change</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">3</div>
+      <div>
+        <h3>STIG compliance auditing</h3>
+        <p>Checks device configs against security hardening rules and reports what
+          passes and what doesn't. Turns a manual, error-prone audit into something you
+          can run on demand and hand to whoever asks for evidence.</p>
+        <div class="tags mono">
+          <span class="tag"><em>does</em> check hardening rules</span>
+          <span class="tag"><em>outputs</em> pass / fail report</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">4</div>
+      <div>
+        <h3>IPAM source-of-truth sync</h3>
+        <p>Reconciles what's actually on the network with NetBox, so your inventory and
+          IP records reflect reality instead of last quarter's plan. The spreadsheet
+          stops being the thing you don't trust.</p>
+        <div class="tags mono">
+          <span class="tag"><em>does</em> sync devices &amp; IPs to netbox</span>
+          <span class="tag"><em>keeps</em> records true</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 HOW IT FITS TOGETHER ============ -->
+  <section id="fits">
+    <div class="mono sec-label">Section 03</div>
+    <h2>How it fits together</h2>
+    <p>The point isn't four scripts. It's four tools sitting on one shared foundation.
+      You define your devices in one inventory: hostnames, groups and per-site variables.
+      Credentials come from the environment, never the inventory. A single connection layer handles getting onto the gear
+      over SSH, so vendor quirks are handled in one place. Each tool then does its own
+      job on top of that.</p>
+
+    <div class="flow" aria-label="Architecture: inventory and connection layer feed four tools">
+      <div class="layer">
+        <span class="k">Layer 1</span>
+        Inventory: hosts, groups, per-site variables
+      </div>
+      <div class="arrow">&darr;</div>
+      <div class="layer">
+        <span class="k">Layer 2</span>
+        Connection layer: SSH to multi-vendor devices
+      </div>
+      <div class="arrow">&darr;</div>
+      <div class="row">
+        <div class="cell">Config<br>backup</div>
+        <div class="cell">Change<br>validation</div>
+        <div class="cell">STIG<br>audit</div>
+        <div class="cell">IPAM<br>sync</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 BUILT WITH ============ -->
+  <section id="built">
+    <div class="mono sec-label">Section 04</div>
+    <h2>Built with</h2>
+    <p>Plain Python and well-worn network libraries. Nothing exotic, on purpose:
+      it should be easy to read, run, and extend.</p>
+    <!-- EDIT: adjust these to match what your repo actually uses -->
+    <div class="stack">
+      <span class="chip">Python</span>
+      <span class="chip">Netmiko</span>
+      <span class="chip">NetBox</span>
+      <span class="chip">Git</span>
+      <span class="chip">STIG benchmarks</span>
+      <span class="chip">GitOps workflow</span>
+      <span class="chip">pytest</span>
+      <span class="chip">pre-commit</span>
+    </div>
+  </section>
+
+  <!-- ============ 05 GET THE CODE ============ -->
+  <section id="get">
+    <div class="mono sec-label">Section 05</div>
+    <h2>Get the code</h2>
+    <p>It's open source under the MIT license. Clone it, read it, run it against a lab.</p>
+    <pre><span class="c"># clone the repo</span>
+git clone https://github.com/archievizt/netops-automation.git
+cd netops-automation</pre>
+    <!-- EDIT: point this at your actual repo URL if it ever changes -->
+    <a class="cta" href="https://github.com/archievizt/netops-automation">View the repository &rarr;</a>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <span class="mono">Archie Abeleda &middot; 2026</span>
+    <span class="mono"><a href="https://github.com/archievizt">github.com/archievizt</a></span>
+  </footer>
+
+</main>
+</body>
+</html>

@@ -15,6 +15,7 @@ My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 - `_config.yml` holds the name, sidebar text, site address, and theme.
 - `_layouts/default.html` is the Minimal theme layout, hardened and with a tidier footer.
 - `assets/css/style.scss` adds the small home page touches (ID block, status dot, tag chips).
+- `netops-automation/` is the netops-automation field report, a standalone page with its own stylesheet and Content Security Policy.
 - `assets/cv.pdf` is optional. Add it and a PDF link appears on the CV page.
 - `SECURITY.md` says how to report a security problem; `.env.example` is the template for local settings.
 

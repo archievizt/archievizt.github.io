@@ -1,0 +1,266 @@
+/* Styles for the netops-automation field report. Kept in a file so the page's
+   Content Security Policy can block inline styles. System fonts only: no third-party requests. */
+  :root{
+    --paper:      #F5F1E8;
+    --paper-sink: #EDE7D9;
+    --ink:        #1C1A17;
+    --ink-soft:   #524C42;
+    --rule:       #D6CDBB;
+    --accent:     #9E3B2C;
+    --accent-dim: rgba(158, 59, 44, 0.10);
+
+    --display: "Fraunces", Georgia, "Times New Roman", serif;
+    --body:    "Newsreader", Georgia, serif;
+    --mono:    "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    --measure: 44rem;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ -webkit-text-size-adjust: 100%; }
+
+  body{
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 19px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap{
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: clamp(2rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2rem) 4rem;
+  }
+
+  /* ---- shared type helpers ---- */
+  .mono{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .accent{ color: var(--accent); }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  /* ---- masthead ---- */
+  .masthead{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+
+  /* ---- hero ---- */
+  .hero{ padding: clamp(2rem, 6vw, 3.4rem) 0 0; }
+
+  .hero h1{
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2.3rem, 6.4vw, 3.7rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    margin: 1rem 0 0;
+    max-width: 20ch;
+  }
+
+  .deck{
+    font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 1.4rem 0 0;
+    max-width: 38ch;
+    line-height: 1.5;
+  }
+
+  /* ---- stat strip ---- */
+  .stats{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--rule);
+    margin: 2.6rem 0 0;
+  }
+  .stat{
+    padding: 1.1rem 1.15rem 1.25rem;
+    border-right: 1px solid var(--rule);
+  }
+  .stat:last-child{ border-right: 0; }
+  .stat b{
+    display: block;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.85rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .stat span{ display: block; margin-top: 0.5rem; }
+
+  /* ---- contents nav ---- */
+  .contents{
+    margin: 3rem 0 0;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--rule);
+  }
+  .contents ul{
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .contents a{
+    font-family: var(--body);
+    font-size: 1.02rem;
+  }
+
+  /* ---- sections ---- */
+  section{ margin-top: clamp(3rem, 8vw, 4.5rem); }
+
+  .sec-label{ margin-bottom: 0.9rem; }
+
+  h2{
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.1rem;
+  }
+
+  p{ margin: 0 0 1.1rem; }
+  p:last-child{ margin-bottom: 0; }
+
+  .lead{ font-size: 1.12rem; }
+
+  /* ---- toolkit entries ---- */
+  .tool{
+    display: grid;
+    grid-template-columns: 3.2rem 1fr;
+    gap: 0 1.1rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tool:last-child{ border-bottom: 1px solid var(--rule); }
+  .tool .num{
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: var(--accent);
+    line-height: 1;
+    padding-top: 0.15rem;
+  }
+  .tool h3{
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.28rem;
+    margin: 0 0 0.4rem;
+  }
+  .tool p{ margin: 0 0 0.8rem; font-size: 1.02rem; color: var(--ink-soft); }
+  .tags{ display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .tags .tag{ display: inline-flex; gap: 0.5rem; }
+  .tags .tag em{ font-style: normal; color: var(--accent); }
+
+  /* ---- flow diagram ---- */
+  .flow{ margin: 1.4rem 0 0; }
+  .flow .layer{
+    border: 1px solid var(--ink);
+    padding: 0.85rem 1rem;
+    background: var(--paper-sink);
+    text-align: center;
+  }
+  .flow .layer .k{ font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.2rem; }
+  .flow .arrow{ text-align: center; color: var(--ink-soft); font-family: var(--mono); font-size: 0.9rem; padding: 0.5rem 0; }
+  .flow .row{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin-top: 0.2rem;
+  }
+  .flow .row .cell{
+    border: 1px solid var(--rule);
+    padding: 0.7rem 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: 1.35;
+    text-align: center;
+    background: var(--paper);
+  }
+
+  /* ---- stack chips ---- */
+  .stack{ display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 0.4rem; }
+  .chip{
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    border: 1px solid var(--rule);
+    padding: 0.4rem 0.7rem;
+    background: var(--paper-sink);
+  }
+
+  /* ---- code / clone ---- */
+  pre{
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    background: var(--ink);
+    color: #EDE7D9;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    line-height: 1.55;
+  }
+  pre .c{ color: #A79E8C; }
+
+  .cta{
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--accent);
+    padding: 0.75rem 1.3rem;
+    margin-top: 0.5rem;
+  }
+  .cta:hover{ text-decoration: none; background: #86321f; }
+
+  /* ---- footer ---- */
+  footer{
+    margin-top: clamp(3.5rem, 9vw, 5rem);
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* ---- entrance motion (skipped if the reader prefers less motion) ---- */
+  @media (prefers-reduced-motion: no-preference){
+    .reveal{ opacity: 0; transform: translateY(12px); animation: rise 0.7s cubic-bezier(.2,.7,.3,1) forwards; }
+    .r1{ animation-delay: 0.05s; } .r2{ animation-delay: 0.13s; }
+    .r3{ animation-delay: 0.21s; } .r4{ animation-delay: 0.29s; }
+    @keyframes rise{ to{ opacity: 1; transform: none; } }
+  }
+
+  /* ---- mobile ---- */
+  @media (max-width: 560px){
+    body{ font-size: 18px; }
+    .stats{ grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2){ border-right: 0; }
+    .stat:nth-child(1), .stat:nth-child(2){ border-bottom: 1px solid var(--rule); }
+    .flow .row{ grid-template-columns: repeat(2, 1fr); }
+    .tool{ grid-template-columns: 2.2rem 1fr; }
+  }

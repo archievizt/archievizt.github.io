@@ -10,13 +10,12 @@ lang: en-CA
 url: https://archievizt.github.io
 baseurl: ""
 
-# The sidebar "View My GitHub Profile" link. Your repositories live under
-# archieabeleda today; change this if you move them to archievizt.
-github_username: archieabeleda
+# The sidebar "View My GitHub Profile" link.
+github_username: archievizt
 social:
   name: Archie Abeleda
   links:
-    - https://github.com/archieabeleda
+    - https://github.com/archievizt
     - https://www.linkedin.com/in/ajrabeleda
 
 # Same theme as the reference site. GitHub Pages builds it natively.

@@ -13,7 +13,7 @@ title: Archie Abeleda
 
 <p class="status"><span class="dot" aria-hidden="true"></span>Systems operational</p>
 
-[CV]({{ '/cv.html' | relative_url }}) · [GitHub](https://github.com/archieabeleda) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [Email](mailto:hello@archieabeleda.dev)
+[CV]({{ '/cv.html' | relative_url }}) · [GitHub](https://github.com/archievizt) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [Email](mailto:hello@archieabeleda.dev)
 
 ## About
 
@@ -65,7 +65,7 @@ Tooling
 `Read-Only First` `Python` `Netmiko` `Typer CLI` `Git` `Drift Detection` `STIG Audit` `NetBox`
 {: .tags}
 
-[Repository](https://github.com/archieabeleda/netops-automation) · [Write-up](https://archieabeleda.github.io/netops-automation/)
+[Repository](https://github.com/archievizt/netops-automation) · [Write-up]({{ '/netops-automation/' | relative_url }})
 
 Lab
 {: .flag}
@@ -83,7 +83,7 @@ Lab
 `VRF-Lite L3Out` `OSPF` `iBGP RR` `VXLAN / EVPN` `Type-5` `Anycast GW` `Nexus 9000v` `IOS-XE` `EVE-NG`
 {: .tags}
 
-[Repository](https://github.com/archieabeleda/evpn-vxlan-l3out-lab)
+[Repository](https://github.com/archievizt/evpn-vxlan-l3out-lab)
 
 More labs, including the hybrid cloud build, are on the [CV]({{ '/cv.html' | relative_url }}).
 
@@ -112,7 +112,7 @@ Let's talk.
 
 Networks, security architecture, or pointing AI at infrastructure without it going sideways. Always up for comparing notes.
 
-[hello@archieabeleda.dev](mailto:hello@archieabeleda.dev) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [GitHub](https://github.com/archieabeleda)
+[hello@archieabeleda.dev](mailto:hello@archieabeleda.dev) · [LinkedIn](https://www.linkedin.com/in/ajrabeleda) · [GitHub](https://github.com/archievizt)
 
 ---
 

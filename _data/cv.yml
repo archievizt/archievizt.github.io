@@ -15,8 +15,8 @@ location: "British Columbia, Canada"
 links:
   - label: "archievizt.github.io"
     url: "https://archievizt.github.io"
-  - label: "github.com/archieabeleda"
-    url: "https://github.com/archieabeleda"
+  - label: "github.com/archievizt"
+    url: "https://github.com/archievizt"
   - label: "linkedin.com/in/ajrabeleda"
     url: "https://www.linkedin.com/in/ajrabeleda"
 
@@ -69,11 +69,11 @@ experience:
 
 projects:
   - name: "netops-automation"
-    url: "https://github.com/archieabeleda/netops-automation"
+    url: "https://github.com/archievizt/netops-automation"
     kind: "Open source"
     description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
   - name: "EVPN fabric with external L3Out"
-    url: "https://github.com/archieabeleda/evpn-vxlan-l3out-lab"
+    url: "https://github.com/archievizt/evpn-vxlan-l3out-lab"
     kind: "Lab"
     description: "Seven nodes in EVE-NG: Nexus 9300v spines as iBGP route reflectors over an OSPF underlay, border leaves handing each tenant to an IOS-XE router on its own VRF-Lite eBGP session, and a 15-point runbook through live border failover. Later extended with k3s, Cilium, and FRR peering eBGP into a leaf."
   - name: "Hybrid cloud"
@@ -91,8 +91,8 @@ projects:
 
 writing:
   - title: "netops-automation field report"
-    url: "https://archieabeleda.github.io/netops-automation/"
-    source: "archieabeleda.github.io"
+    url: "/netops-automation/"
+    source: "archievizt.github.io"
 
 skills:
   - area: "Network"
@@ -130,6 +130,6 @@ certifications:
 
 footer:
   - label: "GitHub"
-    url: "https://github.com/archieabeleda"
+    url: "https://github.com/archievizt"
   - label: "LinkedIn"
     url: "https://www.linkedin.com/in/ajrabeleda"
