@@ -67,7 +67,7 @@ Lab
 
 **How I proved it.** It ships as an importable EVE-NG topology with every device config baked in, and a fifteen-point runbook that runs from OSPF adjacency to live border failover. Where the virtual kit falls short of real hardware, the notes say so instead of pretending. CoPP only polices in software here, and a 9000v cannot terminate MACsec at all.
 
-`VRF-Lite L3Out` `OSPF` `iBGP RR` `VXLAN / EVPN` `Type-5` `Anycast GW` `Nexus 9000v` `IOS-XE` `EVE-NG`
+`VRF-Lite L3Out` `OSPF` `iBGP RR` `VXLAN` `EVPN` `Anycast GW` `Nexus 9000v` `IOS-XE` `EVE-NG`
 {: .tags}
 
 [Repository](https://github.com/archievizt/evpn-vxlan-l3out-lab)
@@ -87,7 +87,7 @@ Over a decade of enterprise kit, plus the AI and hybrid cloud labs I run at home
 - **Perimeter & Access:** `SD-WAN` `IDS / IPS` `NAC` `VPN (IPsec)`
 - **Cloud Networking:** `Google Cloud VPC` `HA VPN` `Cloud Router` `eBGP` `Terraform` `Workload Identity Federation`
 - **Monitoring & Observability:** `Checkmk` `Prometheus` `Grafana` `Dynatrace` `Splunk` `SolarWinds`
-- **Automation:** `Python` `Ansible` `Scrapli` `Netmiko` `Git` `REST APIs`
+- **Automation:** `Python` `Ansible` `Git` `Netmiko` `GitHub Actions` `REST APIs`
 - **Platforms:** `CentOS` `Ubuntu` `Proxmox VE` `Firebase Hosting`
 - **AI Stack:** `Ollama` `Qwen3` `Gemma 4` `nomic-embed-text` `Qdrant` `RAG` `Open WebUI` `OpenClaw` `Gradio`
 {: .stack}
