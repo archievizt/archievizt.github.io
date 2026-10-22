@@ -31,10 +31,10 @@ Lately my off hours go to pointing AI at the network. A home lab where local mod
 
 ## Projects
 
-Everything here checks its own work.
+Everything here marks its own homework. Harshly.
 {: .head}
 
-A self-hosted lab where I build and break network security and AIOps tools end to end. Real Cisco simulation, real local models, and a security architecture stricter than it needs to be. On purpose.
+A self-hosted lab where I build and break network security and AIOps tools end to end. Real Cisco images, real local models, and a security architecture stricter than it needs to be. On purpose.
 
 Tooling
 {: .flag}
@@ -78,10 +78,10 @@ More labs, including the hybrid cloud build, are on the [CV]({{ '/cv.html' | rel
 
 ## Infrastructure & Security Stack
 
-The tools that earn their keep.
+Mind the air gap.
 {: .head}
 
-Over a decade of enterprise kit, plus the AI and hybrid cloud labs I run at home. Grouped by what it does.
+Over a decade taming enterprise kit, plus a home lab running AI, hybrid cloud and a slightly alarming electricity bill.
 
 - **Network & Security:** `Cisco` `Palo Alto` `Check Point` `Zscaler ZIA` `F5 BIG-IP APM`
 - **Perimeter & Access:** `SD-WAN` `IDS / IPS` `NAC` `VPN (IPsec)`
