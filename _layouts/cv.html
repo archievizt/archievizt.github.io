@@ -5,6 +5,8 @@
   (xml_escape, with apostrophes turned into ’), and every link goes through
   _includes/safe-url.html, which only lets https://, mailto:, and
   site-relative (/...) links through. Anything else shows as plain text.
+  The separators between values (" | " before a date, " - " before a
+  school or issuer) come from this layout, not from cv.yml.
 -->
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
@@ -50,14 +52,21 @@
       {% endif %}
 
       <section>
-        <h2>Experience</h2>
+        <h2>Professional Experience</h2>
         {% for job in cv.experience %}
         <article class="entry">
-          <div class="entry-head">
-            <h3>{{ job.role | xml_escape | replace: "&apos;", "’" }} <span class="org">· {{ job.org | xml_escape | replace: "&apos;", "’" }}</span></h3>
-            <span class="when">{{ job.dates | xml_escape | replace: "&apos;", "’" }}</span>
+          <div class="job-head">
+            <h3>{{ job.role | xml_escape | replace: "&apos;", "’" }}</h3>
+            <p class="job-meta"><span class="org-name">{{ job.org | xml_escape | replace: "&apos;", "’" }}</span>{% if job.dates %}<span class="bar" aria-hidden="true">&nbsp;| </span><span class="nowrap dates">{{ job.dates | xml_escape | replace: "&apos;", "’" }}</span>{% endif %}</p>
           </div>
           {% if job.summary %}<p class="entry-sub">{{ job.summary | xml_escape | replace: "&apos;", "’" }}</p>{% endif %}
+          {% if job.highlights %}
+          {% if job.highlights_title %}<p class="entry-label">{{ job.highlights_title | xml_escape | replace: "&apos;", "’" }}</p>{% endif %}
+          <ul class="highlights">
+            {% for h in job.highlights %}<li><strong>{{ h.label | xml_escape | replace: "&apos;", "’" }}:</strong> {{ h.text | xml_escape | replace: "&apos;", "’" }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
           {% if job.bullets %}
           <ul>
             {% for b in job.bullets %}<li>{{ b | xml_escape | replace: "&apos;", "’" }}</li>
@@ -101,11 +110,11 @@
 
       {% if cv.skills %}
       <section>
-        <h2>Skills</h2>
-        <table class="skills">
-          {% for s in cv.skills %}<tr><th scope="row">{{ s.area | xml_escape | replace: "&apos;", "’" }}</th><td>{{ s.items | xml_escape | replace: "&apos;", "’" }}</td></tr>
+        <h2>Technical Skills</h2>
+        <ul class="skills">
+          {% for s in cv.skills %}<li><strong>{{ s.area | xml_escape | replace: "&apos;", "’" }}:</strong> {{ s.items | xml_escape | replace: "&apos;", "’" }}</li>
           {% endfor %}
-        </table>
+        </ul>
       </section>
       {% endif %}
 
@@ -113,11 +122,8 @@
       <section>
         <h2>Education</h2>
         {% for e in cv.education %}
-        <article class="entry">
-          <div class="entry-head">
-            <h3>{{ e.degree | xml_escape | replace: "&apos;", "’" }} <span class="org">· {{ e.school | xml_escape | replace: "&apos;", "’" }}</span></h3>
-            <span class="when">{{ e.date | xml_escape | replace: "&apos;", "’" }}</span>
-          </div>
+        <article class="entry tight">
+          <h3>{{ e.degree | xml_escape | replace: "&apos;", "’" }}<span class="org">{% if e.school %}<span class="bar" aria-hidden="true">&nbsp;-</span> <span class="org-name">{{ e.school | xml_escape | replace: "&apos;", "’" }}</span>{% endif %}{% if e.date %}&nbsp;<span class="nowrap"><span class="bar" aria-hidden="true">|</span>&nbsp;{{ e.date | xml_escape | replace: "&apos;", "’" }}</span>{% endif %}</span></h3>
         </article>
         {% endfor %}
       </section>
@@ -130,11 +136,11 @@
         {%- capture href -%}{%- include safe-url.html url=c.url -%}{%- endcapture -%}
         {%- assign href = href | strip %}
         <article class="entry tight">
-          <div class="entry-head">
-            <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ c.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ c.name | xml_escape | replace: "&apos;", "’" }}{% endif %}</h3>
-            <span class="when">{{ c.date | xml_escape | replace: "&apos;", "’" }}</span>
-          </div>
-          <p class="source">{{ c.issuer | xml_escape | replace: "&apos;", "’" }}</p>
+          <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ c.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ c.name | xml_escape | replace: "&apos;", "’" }}{% endif %}{%- comment -%}
+              The issuer and date stay together and on the same line as the
+              last word of the name; a wrap only ever happens inside the name.
+            {%- endcomment -%}
+            {%- if c.issuer or c.date -%}<span class="org">&nbsp;<span class="nowrap">{% if c.issuer %}<span class="bar" aria-hidden="true">-</span>&nbsp;{{ c.issuer | xml_escape | replace: "&apos;", "’" }}{% endif %}{% if c.date %}{% if c.issuer %}&nbsp;{% endif %}<span class="bar" aria-hidden="true">|</span>&nbsp;{{ c.date | xml_escape | replace: "&apos;", "’" }}{% endif %}</span></span>{%- endif -%}</h3>
         </article>
         {% endfor %}
       </section>

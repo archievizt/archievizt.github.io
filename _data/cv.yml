@@ -8,10 +8,14 @@
 # - This file is public. No phone number, home address, or personal email.
 # - A header link can show a small icon: icon: "web", "code" or "person".
 #   Leave the icon line out for no icon.
+# - A job can list "highlights": each one a bold label plus its text, shown
+#   under highlights_title. Plain one-line "bullets" still work as well.
+# - Don't type the separators. The page adds " | " before each date and
+#   " - " before a school or certification issuer.
+# - Optional: a motto: line under title shows a quote under your name.
 
 name: "Armando Abeleda Jr."
 title: "Network & Infrastructure Security"
-motto: "Calm in the chaos. Stoked in the lab. Learning by building resilient systems from the ground up."
 
 links:
   - label: "archievizt.github.io"
@@ -25,49 +29,54 @@ links:
     icon: "person"
 
 summary:
-  - "Network and Security Specialist working since 2015 across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. Most of that time has gone into segmentation, firewall policy, and change control, and into coordinating the network side when something breaks anyway."
-  - "Day to day that means Palo Alto and Cisco, multi-vendor wireless, and Python and Ansible for the repetitive work. Anything new goes through a lab first, and AI gets read access, never write."
+  - "Network and Security Specialist with over a decade of experience across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. I co-design and secure segmented networks on zero trust principles, with default-deny between zones and defence in depth across Palo Alto, Check Point, F5, and Zscaler. Identity and access management covers 802.1X on every campus, RADIUS through Aruba ClearPass, and TACACS+ device administration through Cisco ISE."
+  - "For compliance and IT operations, I support PCI DSS audits and DR exercises. Python and Ansible handle the repetitive work in production, with changes tested in EVE-NG first. In my hybrid lab, the Google Cloud side is moving into Terraform. I am now building an on-call triage agent that runs a tool-calling loop with Claude or a local model. It gathers evidence through read-only tools and leaves the decision to a person."
 
 experience:
-  - role: "Network Administrator"
-    org: "Primacorp Ventures Inc."
-    dates: "Jun 2023 to Present"
-    summary: "Network Operation Support, New Westminster, BC. 700+ devices across 40+ sites in five provinces and four time zones."
-    bullets:
-      - "Designed and implemented the data centre re-segmentation on a high-speed Catalyst core, replacing grouped Palo Alto security zones with a zone per subnet and VRF transit from the core to the firewall."
-      - "Designed and built network and security for new campus sites, from topology planning with stakeholders to switch and router deployment, with edge routers on the provider-managed SD-WAN."
-      - "Took part in onboarding nine acquired senior living sites: security policy review before turnover, a separate domain built to the campus design, then cutover one site at a time once approved."
-      - "Built open-source monitoring with Checkmk, Prometheus, and Grafana when there was no working NMS, ran on it for about a year, then moved polling to a commercial platform."
-      - "Look after multi-vendor wireless (300+ Cisco, 200+ Juniper Mist, and 65 HPE Aruba access points), including RF site assessments, with 802.1X on every campus."
-      - "Cover voice as part of the network role: voice VLANs, QoS, PoE for IP phones, and call routing and SIP in Cisco CUCM on VMware vSphere."
-      - "Automate repetitive device configuration with Python and Ansible, and test changes in EVE-NG before they reach production."
+  - role: "Network Administrator (Network Operation Support)"
+    org: "Primacorp Ventures Inc. / Campus Support"
+    dates: "Jun 2023 - Present"
+    summary: "Handle network operations, incident response, and capacity planning for an enterprise estate of 700+ devices across 40+ sites in five provinces and four time zones. Take projects end to end, from requirements to implementation, while resolving routing faults, hardware failures, and firewall access issues, and advising stakeholders on infrastructure needs and risk."
+    highlights_title: "Key initiatives"
+    highlights:
+      - label: "Greenfield sites and data centre redesign"
+        text: "Designed and built network and security for new campus sites, from topology planning with stakeholders to switch, edge router, and wireless deployment with RF site assessments. Designed and implemented the data centre re-segmentation on a high-speed Catalyst core, with VRF transit to the next-generation firewalls."
+      - label: "Infrastructure as code and automation"
+        text: "Built Python scripts and Ansible playbooks for provisioning, configuration backups, and state enforcement to cut manual configuration drift, with changes tested in EVE-NG before production."
 
-  - role: "Lead Engineer, Network and Security"
+  - role: "Lead Engineer, Network and Security (Information Services)"
     org: "Marina Bay Sands Pte. Ltd."
-    dates: "Dec 2018 to Mar 2023"
-    summary: "Singapore. An integrated resort: hotel, gaming floor, retail, and convention centre, on ten firewalled backbones including Data, Gaming, Facility, AV, Guest, and DMZ."
-    bullets:
-      - "Took three to five firewall changes a week through CAB on a multi-vsys Palo Alto HA cluster managed from Panorama, with a platform snapshot before every change."
-      - "Recertified a firewall rule base of 1,600+ rules in AlgoSec ahead of a PCI DSS audit, and worked with the compliance team on the PCI backbone audit, covering access control, segmentation, user access reviews, and firewall encryption settings."
-      - "Coordinated the network side of major incident bridges, bringing in Cisco high-touch engineers and feeding network findings into regulator-mandated RCAs for gaming floor and surveillance faults."
-      - "Pulled off the shift rota for project work: aligned device configuration to the solution architect's design for the 2022 core switch and firewall refresh, and managed vendor contractors on a biometric access migration."
-      - "Applied the network hardening standard across core, distribution, and access switches: SSH with VTY access lists, SNMPv3, control plane policing, DHCP snooping, BPDU guard, and unused port shutdown."
-      - "Handled the network and security section of the annual DR exercise, which cut live production traffic over to the backup data centre."
-      - "Coached engineers until they handled Tier 2 and Tier 3 work on their own."
+    dates: "Dec 2018 - Mar 2023"
+    summary: "Coordinated the network side of major incidents and vendor TAC escalations, from first triage through service restoration, and fed network findings into root cause reviews, including regulator-mandated ones. Took changes through a strict Change Advisory Board (CAB) process on high-availability Cisco, Palo Alto, Check Point, and F5 platforms, with security reviews, UAT, method of procedure documents, platform snapshots, and up-to-date CMDB records. Handled the network and security section of the annual DR exercise, which cut live production traffic over to the backup data centre. Built SolarWinds health and security dashboards, and coached engineers until they handled Tier 2 and Tier 3 work on their own."
+    highlights_title: "Key initiatives"
+    highlights:
+      - label: "Segmentation and OT isolation"
+        text: "Contributed to the security architecture of ten firewalled backbones, with the multi-vsys Palo Alto estate managed from Panorama. On the 2022 refresh, aligned configuration to the solution architect's design that gave ICS/SCADA its own virtual firewall, apart from corporate IT, and took part in the first cutovers."
+      - label: "Identity and access"
+        text: "Administered TACACS+ device authentication on Cisco ISE and RSA MFA. Configured role-scoped vendor VPN access on F5 BIG-IP APM, enforced internet traffic inspection through Zscaler Internet Access (ZIA), and scripted hybrid Microsoft 365 and Azure AD account provisioning in PowerShell."
+      - label: "Firewall policy and PCI DSS"
+        text: "Recertified the multi-vsys firewall rule base in AlgoSec ahead of the PCI DSS audit, retiring shadowed, duplicate, and unused rules and mapping active rules to named business owners. Worked with the compliance team on the PCI backbone audit and kept the cardholder data environment (CDE) segmented, with its boundaries checked by quarterly compliance scans."
+      - label: "Vulnerability management and threat tuning"
+        text: "Ran authenticated vulnerability scans over out-of-band management paths and triaged third-party penetration test findings by CVSS score, driving firmware and hotfix remediation on Cisco, Palo Alto, F5, and Check Point appliances. Tuned inline Palo Alto IDS/IPS signatures with host-scoped exceptions, and tracked residual risk in ServiceNow problem records assigned to application owners."
 
-  - role: "Senior Network Engineer, then Shift Infrastructure Engineer"
+  - role: "Senior Network Engineer (Project and Operations)"
     org: "Optimum Solutions Pte. Ltd."
-    dates: "Jul 2015 to Dec 2018"
-    summary: "Deployed to Marina Bay Sands, first on the surveillance network migration, then on 24/7 shift operations."
-    bullets:
-      - "Prepared each area of the surveillance migration with configuration review and burn-in testing, migrated devices, and assisted the Cisco engineering team on the multicast CCTV cutover."
-      - "Worked on the firewall migration: some legacy Check Point firewalls moved to Palo Alto with the rule base validated either side of cutover, and the rest were upgraded and brought under Check Point Multi-Domain Security Management."
-      - "Took part in adding a live gaming service to the table games backbone, from requirements and stakeholder meetings through to a new VLAN, subnet, and security zone."
-      - "Worked in Aruba ClearPass Policy Manager on enforcement policies, AD group role mapping, and RADIUS clients for the Aruba wireless controllers."
+    dates: "Jul 2015 - Dec 2018"
+    summary: "Deployed on site at Marina Bay Sands for infrastructure modernisation and 24/7 operations across multiple data centres, campus switching, wireless, firewall clusters, and F5 BIG-IP. Handled incident, problem, service request, and change workflows in ServiceNow, from intake through root cause analysis (RCA) and closure, while keeping CMDB records, hardware inventory, and vendor RMAs current. Set up patch management across the data centres, added SolarWinds performance monitoring, and ran scheduled access control audits with the security team."
+    highlights_title: "Key initiatives"
+    highlights:
+      - label: "Firewall migration and Check Point consolidation"
+        text: "Worked on the migration that moved part of the legacy Check Point estate to Palo Alto, validating the rule base and traffic flows in AlgoSec either side of each cutover. Upgraded the remaining Check Point firewalls and brought them under Multi-Domain Security Management, which the estate did not have before."
+      - label: "Multicast surveillance migration (2015 to 2016)"
+        text: "Worked on moving the casino's multicast CCTV network from legacy Brocade hardware to Cisco. Prepared each area with configuration review and burn-in testing, migrated devices inside approved windows, and assisted the Cisco engineering team on the multicast cutover, with dual recording paths keeping the gaming floor cameras recording throughout."
+      - label: "Table games network (2016 to 2017)"
+        text: "Took part in adding a live gaming service to the table games backbone, from requirements and stakeholder meetings to a new VLAN, subnet, and security zone, on a casino floor running 24/7 under Casino Regulatory Authority (CRA) rules."
+      - label: "Wireless access control"
+        text: "Configured enforcement policies, AD group role mapping, and RADIUS clients in Aruba ClearPass Policy Manager for the Aruba wireless controllers."
 
   - role: "Network Engineer"
     org: "TechnoPals Pte. Ltd."
-    dates: "May 2015 to Jul 2015"
+    dates: "May 2015 - Jul 2015"
     bullets:
       - "Deployed to NCS Pte. Ltd. to support the network for the 2015 SEA Games in Singapore."
 
@@ -89,9 +98,6 @@ projects:
   - name: "Local AI node"
     kind: "Lab"
     description: "Ollama, Open WebUI, and Qdrant in the home lab, for research into local LLMs that watch a network without touching it."
-  - name: "Previous portfolio site"
-    kind: "Personal"
-    description: "Static site on Firebase Hosting with a strict content security policy, deployed from GitHub Actions through Workload Identity Federation, so there are no service account keys to leak."
 
 writing:
   - title: "netops-automation field report"
@@ -99,28 +105,32 @@ writing:
     source: "archievizt.github.io"
 
 skills:
-  - area: "Network"
-    items: "Cisco Catalyst and Nexus, HPE Comware and ProVision, VLAN and VRF design, OSPF, BGP, EVPN-VXLAN (lab), SD-WAN (provider-managed in production, Cisco Catalyst in the lab), multi-vendor wireless, RF site assessment, voice on Cisco CUCM"
-  - area: "Security"
-    items: "Palo Alto (Panorama, HA, multi-vsys), Check Point Multi-Domain Security Management, AlgoSec, segmentation, 802.1X, EAP-TLS, RADIUS (Aruba ClearPass), TACACS+ (Cisco ISE), device hardening, remote access VPN, EDR console administration, vulnerability scanning, PCI DSS audit support"
-  - area: "Cloud"
-    items: "Google Cloud networking in the lab (HA VPN, Cloud Router, eBGP), Terraform, Firebase Hosting, Workload Identity Federation"
-  - area: "Infrastructure"
-    items: "VMware vSphere and Proxmox for network workloads, Checkmk, Prometheus, Grafana, SNMP, Active Directory, Microsoft 365 user administration, PowerShell, change control, DR exercises"
-  - area: "Automation and AI"
-    items: "Python (Netmiko, Typer, pytest), Ansible, Git, GitHub Actions, NetBox, EVE-NG, local LLMs (Ollama, Open WebUI, Qdrant)"
+  - area: "Cybersecurity Operations and Controls"
+    items: "Palo Alto Networks (NGFW) with Panorama, Multi-vsys, App-ID, Directory-Integrated User-ID, GlobalProtect and PAN-OS Lifecycle, Check Point and Multi-Domain Security Management, AlgoSec, IDS/IPS, WAF, DLP, Threat and Traffic Log Analysis, Incident Response, Root Cause Analysis, Network and Operational Technology (OT) Segmentation"
+  - area: "Vulnerability Management, Risk and Compliance"
+    items: "Nessus, Rapid7, Risk Management and Risk Assessment, Risk-Based Triage and Remediation Tracked to Closure, Firewall Rule Recertification, User Access Review, ACL Auditing, Vulnerability Assessments, Audit Evidence Collection, PCI DSS, NIST CSF"
+  - area: "Identity and Access Management, Endpoint"
+    items: "Cisco Identity Services Engine (ISE), Aruba ClearPass, Zscaler Internet Access (ZIA), Zero Trust, 802.1X, RADIUS, EAP-TLS Certificate-Based Authentication, Network Access Control, Least Privilege Enforcement, SentinelOne Endpoint Detection and Response (EDR), Windows Server"
+  - area: "Network, Wireless and Remote Access"
+    items: "TCP/IP, DNS, DHCP, BGP, OSPF, EIGRP, MPLS, VLAN, STP, VRRP, LACP, vPC, NAT, QoS, Multicast, VXLAN and EVPN (lab), IPsec Site-to-Site VPN, VMware VeloCloud SD-WAN, Cisco Nexus, Cisco Catalyst, Cisco WLC, Juniper Mist, HPE Aruba, F5 BIG-IP and BIG-IP APM Remote Access VPN"
+  - area: "Cloud Networking, Systems Administration and Virtualisation"
+    items: "Google Cloud (lab: HA VPN, Cloud Router, eBGP Hybrid Connectivity), Linux, VMware vSphere, Proxmox VE, Docker and Kubernetes (lab)"
+  - area: "Backup, Recovery and Business Continuity"
+    items: "Configuration Backup with Drift Detection, Tested Rollback and Back-Out Planning, Firewall and WAN High Availability Failover Testing, Disaster Recovery and Method of Procedure (MOP) Documentation, VMware and Proxmox Snapshot and Restore"
+  - area: "Automation, Monitoring and Governance"
+    items: "Python, Ansible, Netmiko, REST APIs, Git, GitHub Actions, Checkmk, Prometheus, Grafana, SolarWinds, Syslog, SNMP, NetFlow, Wireshark, Security Monitoring, ITIL Change Management, ServiceNow, CAB, CMDB, Technical Documentation, Standards and Operating Procedures"
 
 education:
-  - degree: "B.Sc., Electronics and Communications Engineering"
+  - degree: "B.Sc. Electronics and Communications Engineering"
     school: "Technological Institute of the Philippines, Manila"
     date: "Oct 2008"
 
 certifications:
-  - name: "CISSP"
+  - name: "Certified Information Systems Security Professional (CISSP)"
     issuer: "ISC2"
     date: "Apr 2026"
     url: "https://www.credly.com/badges/00c78370-a452-4af7-bec9-78c4dd4a7720"
-  - name: "CCSP"
+  - name: "Certified Cloud Security Professional (CCSP)"
     issuer: "ISC2"
     date: "Jul 2026"
     url: "https://www.credly.com/badges/651c7d74-5b6c-49fd-997b-9a498aa21085"

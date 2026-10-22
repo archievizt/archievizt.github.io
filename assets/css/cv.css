@@ -117,27 +117,38 @@ h3 {
 h3.plain { font-weight: 400; }
 h3 a, h3.plain a { color: var(--link); }
 .org { color: var(--meta); font-weight: 400; }
+/* On wider screens a company or school name stays on one line: a long
+   heading breaks after the dot, never inside the name ("Pte. / Ltd."). */
+@media (min-width: 561px) {
+  .org-name { white-space: nowrap; }
+}
 
 .when { color: var(--meta); font-size: 12px; white-space: nowrap; }
 
+/* Job heading: the title on one line, then "Company | Dates" under it. */
+.job-meta { margin: 1px 0 0; color: var(--meta); font-size: 13px; }
+.bar { color: var(--dots); }
+.nowrap { white-space: nowrap; }
+
 .entry-sub { margin: 3px 0 6px; }
+.entry-label {
+  margin: 10px 0 0;
+  color: var(--meta);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.highlights strong { color: var(--ink); }
 .entry ul { margin: 6px 0 0; padding-left: 18px; }
 .entry li { margin: 3px 0; }
 
 .source { margin: 0; color: var(--meta); font-size: 12px; }
 
-/* Skills */
-table.skills { width: 100%; border-collapse: collapse; }
-.skills th {
-  width: 150px;
-  padding: 5px 16px 5px 0;
-  color: var(--ink);
-  font-weight: 700;
-  text-align: left;
-  vertical-align: top;
-  white-space: nowrap;
-}
-.skills td { padding: 5px 0; vertical-align: top; }
+/* Technical skills: a bold group name, then the list on the same line. */
+ul.skills { margin: 0; padding: 0; list-style: none; }
+ul.skills li { margin: 0 0 8px; }
+ul.skills strong { color: var(--ink); }
 
 /* Footer */
 .cv-foot {
@@ -155,31 +166,39 @@ table.skills { width: 100%; border-collapse: collapse; }
   .cv-contact .item { display: block; }
   .cv-contact .sep { display: none; }
   .entry-head { grid-template-columns: minmax(0, 1fr); }
-  .skills tr, .skills th, .skills td { display: block; width: auto; }
-  .skills th { padding: 6px 0 0; }
-  .skills td { padding: 0 0 6px; }
+  /* Company on one line, dates on the next; the bar between them hides. */
+  .job-meta .bar { display: none; }
+  .job-meta .dates { display: block; }
 }
 
 /* Print: browser "Save as PDF" gives a clean, tighter CV */
 @media print {
-  @page { margin: 12mm 13mm; }
-  body { background: #FFFFFF; font-size: 8.8pt; line-height: 1.38; }
+  @page { margin: 9mm 12mm; }
+  body { background: #FFFFFF; font-size: 8.6pt; line-height: 1.27; }
   .cv { max-width: none; padding: 0; }
   h1 { font-size: 15pt; margin-bottom: 1pt; }
-  h2 { margin: 11pt 0 6pt; padding-bottom: 3pt; font-size: 7.5pt; break-after: avoid; }
+  h2 { margin: 8pt 0 5pt; padding-bottom: 3pt; font-size: 7.5pt; break-after: avoid; }
   h3 { font-size: 9.2pt; }
   .cv-motto, .cv-contact { font-size: 8.3pt; }
   .cv-contact { margin-top: 5pt; }
   .cv-summary { margin-top: 9pt; }
   .cv-summary p { margin-bottom: 4pt; }
   .when, .source { font-size: 8pt; }
-  .entry { margin-bottom: 7pt; break-inside: auto; }
-  .entry.tight { margin-bottom: 5pt; }
-  .entry-head { break-after: avoid; }
+  .entry { margin-bottom: 6pt; break-inside: auto; }
+  .entry.tight { margin-bottom: 1pt; }
+  /* Keep a heading with the text under it. When the heading is all there is,
+     let the page break after it, so short lists can share a page instead
+     of moving to the next one as a block. */
+  .entry-head, .job-head { break-after: avoid; }
+  .job-head { break-inside: avoid; }
+  .entry-head:last-child { break-after: auto; }
+  .job-meta { font-size: 8.3pt; }
   .entry-sub { margin: 1pt 0 2pt; }
+  .entry-label { margin-top: 2pt; font-size: 7pt; line-height: 1.1; }
   .entry ul { margin-top: 2pt; padding-left: 13pt; }
-  .entry li { margin: 0; break-inside: avoid; }
-  .skills th { width: 105pt; padding: 1.5pt 10pt 1.5pt 0; }
-  .skills td { padding: 1.5pt 0; }
+  /* A long bullet may run onto the next page, at least two lines each side. */
+  .entry li { margin: 0; orphans: 2; widows: 2; }
+  /* The skills list is set a touch smaller, so the CV prints on two pages. */
+  ul.skills li { margin-bottom: 2pt; font-size: 8.2pt; line-height: 1.22; }
   .cv-foot { display: none; }
 }
