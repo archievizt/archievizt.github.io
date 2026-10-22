@@ -29,8 +29,8 @@ links:
     icon: "person"
 
 summary:
-  - "Network and Security Specialist with over a decade securing enterprise, hospitality, and regulated gaming networks in Singapore and Canada, currently focused on bringing modern controls to the infrastructure layer, with zero trust segmentation, identity-based access, endpoint detection and response, cloud networking as code, and AI that reads a network without touching it."
-  - "Deep expertise in next-generation firewalls, network segmentation, 802.1X access control, and change-controlled operations under PCI DSS; working knowledge of Google Cloud hybrid connectivity, Terraform, Python and Ansible automation, and local LLM tooling. Particular interest in on-call triage agents that gather evidence through read-only tools and leave the decision to a person."
+  - "Network and Security Specialist with over a decade securing enterprise, hospitality, and regulated gaming networks in Singapore and Canada, currently focused on bringing modern controls to the infrastructure layer, with zero trust segmentation, identity-based access, endpoint detection and response, cloud networking as code, and AI coding agents put to work on the network safely."
+  - "Deep expertise in next-generation firewalls, network segmentation, 802.1X access control, and change-controlled operations under PCI DSS; working knowledge of Google Cloud hybrid connectivity, Terraform, Python and Ansible automation, and local LLM tooling. My main project pairs terminal coding agents with CLI-driven infrastructure, network, security, and observability tools, where read-only access and a human approval keep the agent useful without letting it change production on its own."
 
 experience:
   - role: "Network Administrator (Network Operation Support)"
@@ -85,13 +85,13 @@ projects:
     url: "https://github.com/archievizt/netops-automation"
     kind: "Open source"
     description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
+  - name: "Hybrid Cloud on Google Cloud Platform"
+    kind: "Lab"
+    description: "Route-based IKEv2 IPsec over virtual tunnel interfaces from OPNsense and VyOS, built in parallel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, IKE and ESP only from the Google peer, and the cloud VM reached through Identity-Aware Proxy with no public IP. The cloud side was imported into Terraform behind a zero-destroy plan gate, with per-tunnel teardown and pre-shared keys that rotate one tunnel at a time."
   - name: "EVPN fabric with external L3Out"
     url: "https://github.com/archievizt/evpn-vxlan-l3out-lab"
     kind: "Lab"
     description: "Seven nodes in EVE-NG: Nexus 9300v spines as iBGP route reflectors over an OSPF underlay, border leaves handing each tenant to an IOS-XE router on its own VRF-Lite eBGP session, and a 15-point runbook through live border failover. Later extended with k3s, Cilium, and FRR peering eBGP into a leaf."
-  - name: "Hybrid Cloud on Google Cloud Platform"
-    kind: "Lab"
-    description: "Route-based IPsec from an on-premises lab to Google Cloud, built twice in parallel so the two platforms could be compared without a cutover. OPNsense and VyOS each terminate an IKEv2 tunnel (AES-256, SHA-256, DH group 14) over a virtual tunnel interface to one HA VPN gateway, one per gateway interface, on their own public address, LAN, and autonomous system. eBGP to Cloud Router carries the routes across three autonomous systems, with prefix lists and route maps filtering both directions, MTU 1400 and MSS clamping at 1360 on the tunnel interfaces, default-deny firewalls that accept IKE and ESP only from the Google peer, and SSH to the cloud VM through Identity-Aware Proxy with no external IP. The hand-built cloud side was then imported into Terraform rather than rebuilt, with a zero-destroy plan gate before any apply, each router as one entry in a map, one variable to build or tear down each tunnel while the gateway addresses stay fixed, and pre-shared keys held as sensitive values that rotate one tunnel at a time."
   - name: "Cisco Catalyst SD-WAN"
     kind: "Lab"
     description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."

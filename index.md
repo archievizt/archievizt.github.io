@@ -57,6 +57,22 @@ Tooling
 Lab
 {: .flag}
 
+### Hybrid Cloud on Google Cloud Platform
+
+*Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover.*
+
+**What it is.** Route-based IPsec from my lab to Google Cloud. OPNsense and VyOS each hold an IKEv2 tunnel over a virtual tunnel interface to the same HA VPN gateway, one per gateway interface, on their own public address, LAN, and AS number. eBGP to Cloud Router carries the routes, with prefix lists and route maps filtering both directions, so neither side can push a prefix the other did not ask for.
+
+**Locked down by default.** Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault.
+
+**The cloud side as code.** I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time. The failures are written up too. A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing.
+
+`Route-Based IPsec` `IKEv2` `VTI` `eBGP` `HA VPN` `Cloud Router` `OPNsense` `VyOS` `FRR` `Terraform` `Identity-Aware Proxy`
+{: .tags}
+
+Lab
+{: .flag}
+
 ### EVPN Fabric with External L3Out
 
 *A spine-leaf EVPN fabric that hands each tenant off to the outside world on its own eBGP session. Every hop proven before I trust it.*
@@ -71,22 +87,6 @@ Lab
 {: .tags}
 
 [Repository](https://github.com/archievizt/evpn-vxlan-l3out-lab)
-
-Lab
-{: .flag}
-
-### Hybrid Cloud on Google Cloud Platform
-
-*Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover.*
-
-**What it is.** Route-based IPsec from my lab to Google Cloud. OPNsense and VyOS each hold an IKEv2 tunnel over a virtual tunnel interface to the same HA VPN gateway, one per gateway interface, on their own public address, LAN, and AS number. eBGP to Cloud Router carries the routes, with prefix lists and route maps filtering both directions, so neither side can push a prefix the other did not ask for.
-
-**Locked down by default.** Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault.
-
-**The cloud side as code.** I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time. The failures are written up too. A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing.
-
-`Route-Based IPsec` `IKEv2` `VTI` `eBGP` `HA VPN` `Cloud Router` `OPNsense` `VyOS` `FRR` `Terraform` `Identity-Aware Proxy`
-{: .tags}
 
 More labs are on the [CV]({{ '/cv.html' | relative_url }}).
 
