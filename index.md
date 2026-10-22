@@ -76,7 +76,7 @@ More labs, including the hybrid cloud build, are on the [CV]({{ '/cv.html' | rel
 
 ---
 
-## Infrastructure & security stack
+## Infrastructure & Security Stack
 
 The tools that earn their keep.
 {: .head}
