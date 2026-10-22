@@ -23,7 +23,7 @@ Lately my off hours go to pointing AI at the network. A home lab where local mod
 - **Automation that runs itself.** Python and Ansible handle the toil, so I never babysit a CLI for the same task twice.
 - **Self-hosted AI.** Local models on my own hardware, tuned where the cloud can't watch. Nothing leaves the house.
 - **Triage agent, human call.** I'm building an on-call agent that takes a Grafana alert, gathers evidence with read-only tools and writes up a triage note. A person still makes the call.
-- **Hybrid cloud.** My home lab reaches Google Cloud over two IPsec tunnels with BGP on top. The cloud side is moving into Terraform, one imported resource at a time.
+- **Hybrid cloud.** My lab reaches Google Cloud over two IPsec tunnels with BGP on top, one from OPNsense and one from VyOS. The cloud side lives in Terraform now, imported from what I built by hand, and one variable tears the tunnels down when I'm done.
 - **Aggressive segmentation.** Every segment walled off from the rest. Default-deny or it didn't happen.
 - **Breaking my own lab.** I go looking for the weak spots before anyone else does. Better a quiet Tuesday than a Friday night.
 
@@ -57,22 +57,6 @@ Tooling
 Lab
 {: .flag}
 
-### Hybrid Cloud on Google Cloud Platform
-
-*Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover.*
-
-**What it is.** Route-based IPsec from my lab to Google Cloud. OPNsense and VyOS each hold an IKEv2 tunnel over a virtual tunnel interface to the same HA VPN gateway, one per gateway interface, on their own public address, LAN, and AS number. eBGP to Cloud Router carries the routes, with prefix lists and route maps filtering both directions, so neither side can push a prefix the other did not ask for.
-
-**Locked down by default.** Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault.
-
-**The cloud side as code.** I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time. The failures are written up too. A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing.
-
-`Route-Based IPsec` `IKEv2` `VTI` `eBGP` `HA VPN` `Cloud Router` `OPNsense` `VyOS` `FRR` `Terraform` `Identity-Aware Proxy`
-{: .tags}
-
-Lab
-{: .flag}
-
 ### EVPN Fabric with External L3Out
 
 *A spine-leaf EVPN fabric that hands each tenant off to the outside world on its own eBGP session. Every hop proven before I trust it.*
@@ -88,6 +72,22 @@ Lab
 
 [Repository](https://github.com/archievizt/evpn-vxlan-l3out-lab)
 
+Lab
+{: .flag}
+
+### Hybrid Cloud on Google Cloud Platform
+
+*Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover.*
+
+**What it is.** Route-based IPsec from my lab to Google Cloud. OPNsense and VyOS each hold an IKEv2 tunnel over a virtual tunnel interface to the same HA VPN gateway, one per gateway interface, on their own public address, LAN, and AS number. eBGP to Cloud Router carries the routes, with prefix lists and route maps filtering both directions, so neither side can push a prefix the other did not ask for.
+
+**Locked down by default.** Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault.
+
+**The cloud side as code.** I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time. The failures are written up too. A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing.
+
+`Route-Based IPsec` `IKEv2` `VTI` `eBGP` `HA VPN` `Cloud Router` `OPNsense` `VyOS` `FRR` `Terraform` `Identity-Aware Proxy`
+{: .tags}
+
 More labs are on the [CV]({{ '/cv.html' | relative_url }}).
 
 ---
@@ -101,10 +101,10 @@ Over a decade taming enterprise kit, plus a home lab running AI, hybrid cloud an
 
 - **Network & Security:** `Cisco` `Palo Alto` `Check Point` `Zscaler ZIA` `F5 BIG-IP APM`
 - **Perimeter & Access:** `SD-WAN` `IDS / IPS` `NAC` `VPN (IPsec)`
-- **Cloud Networking:** `Google Cloud VPC` `HA VPN` `Cloud Router` `eBGP` `Terraform` `Identity-Aware Proxy`
+- **Cloud Networking:** `Google Cloud VPC` `HA VPN` `Cloud Router` `eBGP` `Terraform` `Workload Identity Federation`
 - **Monitoring & Observability:** `Checkmk` `Prometheus` `Grafana` `Dynatrace` `Splunk` `SolarWinds`
 - **Automation:** `Python` `Ansible` `Git` `Netmiko` `GitHub Actions` `REST APIs`
-- **Platforms:** `CentOS` `Ubuntu` `OPNsense` `VyOS` `Proxmox VE` `Firebase Hosting`
+- **Platforms:** `CentOS` `Ubuntu` `Proxmox VE` `OPNsense` `VyOS` `Firebase Hosting`
 - **AI Stack:** `Ollama` `Qwen3` `Gemma 4` `nomic-embed-text` `Qdrant` `RAG` `Open WebUI` `OpenClaw` `Gradio`
 {: .stack}
 

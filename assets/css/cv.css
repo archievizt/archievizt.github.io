@@ -194,11 +194,13 @@ ul.skills strong { color: var(--ink); }
   .entry-head:last-child { break-after: auto; }
   .job-meta { font-size: 8.3pt; }
   .entry-sub { margin: 1pt 0 2pt; }
-  .entry-label { margin-top: 2pt; font-size: 7pt; line-height: 1.1; }
+  /* The small "Key initiatives" caption is dropped in print to save space;
+     the bold label on each bullet carries the structure on paper. */
+  .entry-label { display: none; }
   .entry ul { margin-top: 2pt; padding-left: 13pt; }
   /* A long bullet may run onto the next page, at least two lines each side. */
   .entry li { margin: 0; orphans: 2; widows: 2; }
   /* The skills list is set a touch smaller, so the CV prints on two pages. */
-  ul.skills li { margin-bottom: 2pt; font-size: 8.2pt; line-height: 1.22; }
+  ul.skills li { margin-bottom: 2pt; font-size: 8.2pt; line-height: 1.22; break-inside: avoid; }
   .cv-foot { display: none; }
 }

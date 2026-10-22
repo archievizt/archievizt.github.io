@@ -29,8 +29,8 @@ links:
     icon: "person"
 
 summary:
-  - "Network & Infrastructure Security with over a decade of experience across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. I design and secure segmented networks on zero trust principles, with default-deny between zones and defence in depth across Palo Alto, Check Point, F5, and Zscaler. Identity and access management covers 802.1X on every campus, RADIUS through Aruba ClearPass, and TACACS+ device administration through Cisco ISE."
-  - "For compliance and IT operations, I support PCI DSS audits and DR exercises. Python and Ansible handle the repetitive work in production, with changes tested in EVE-NG first. In my hybrid lab, the Google Cloud side is moving into Terraform. I am now building an on-call triage agent that runs a tool-calling loop with Claude or a local model. It gathers evidence through read-only tools and leaves the decision to a person."
+  - "Network and Security Specialist with over a decade securing enterprise, hospitality, and regulated gaming networks in Singapore and Canada, currently focused on bringing modern controls to the infrastructure layer, with zero trust segmentation, identity-based access, endpoint detection and response, cloud networking as code, and AI that reads a network without touching it."
+  - "Deep expertise in next-generation firewalls, network segmentation, 802.1X access control, and change-controlled operations under PCI DSS; working knowledge of Google Cloud hybrid connectivity, Terraform, Python and Ansible automation, and local LLM tooling. Particular interest in on-call triage agents that gather evidence through read-only tools and leave the decision to a person."
 
 experience:
   - role: "Network Administrator (Network Operation Support)"
@@ -89,9 +89,9 @@ projects:
     url: "https://github.com/archievizt/evpn-vxlan-l3out-lab"
     kind: "Lab"
     description: "Seven nodes in EVE-NG: Nexus 9300v spines as iBGP route reflectors over an OSPF underlay, border leaves handing each tenant to an IOS-XE router on its own VRF-Lite eBGP session, and a 15-point runbook through live border failover. Later extended with k3s, Cilium, and FRR peering eBGP into a leaf."
-  - name: "Hybrid cloud"
+  - name: "Hybrid Cloud on Google Cloud Platform"
     kind: "Lab"
-    description: "Proxmox home lab to Google Cloud over HA VPN, with two IPsec tunnels and eBGP to Cloud Router, terminated on OPNsense and VyOS side by side. The Google Cloud side is moving into Terraform."
+    description: "Route-based IPsec from an on-premises lab to Google Cloud, built twice in parallel so the two platforms could be compared without a cutover. OPNsense and VyOS each terminate an IKEv2 tunnel (AES-256, SHA-256, DH group 14) over a virtual tunnel interface to one HA VPN gateway, one per gateway interface, on their own public address, LAN, and autonomous system. eBGP to Cloud Router carries the routes across three autonomous systems, with prefix lists and route maps filtering both directions, MTU 1400 and MSS clamping at 1360 on the tunnel interfaces, default-deny firewalls that accept IKE and ESP only from the Google peer, and SSH to the cloud VM through Identity-Aware Proxy with no external IP. The hand-built cloud side was then imported into Terraform rather than rebuilt, with a zero-destroy plan gate before any apply, each router as one entry in a map, one variable to build or tear down each tunnel while the gateway addresses stay fixed, and pre-shared keys held as sensitive values that rotate one tunnel at a time."
   - name: "Cisco Catalyst SD-WAN"
     kind: "Lab"
     description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."
@@ -112,13 +112,13 @@ skills:
   - area: "Identity and Access Management, Endpoint"
     items: "Cisco Identity Services Engine (ISE), Aruba ClearPass, Zscaler Internet Access (ZIA), Zero Trust, 802.1X, RADIUS, EAP-TLS Certificate-Based Authentication, Network Access Control, Least Privilege Enforcement, SentinelOne Endpoint Detection and Response (EDR), Windows Server"
   - area: "Network, Wireless and Remote Access"
-    items: "TCP/IP, DNS, DHCP, BGP, OSPF, EIGRP, MPLS, VLAN, STP, VRRP, LACP, vPC, NAT, QoS, Multicast, VXLAN and EVPN (lab), IPsec Site-to-Site VPN, VMware VeloCloud SD-WAN, Cisco Nexus, Cisco Catalyst, Cisco WLC, Juniper Mist, HPE Aruba, F5 BIG-IP and BIG-IP APM Remote Access VPN"
+    items: "TCP/IP, DNS, DHCP, BGP, OSPF, EIGRP, MPLS, VLAN, STP, VRRP, LACP, vPC, NAT, QoS, Multicast, VXLAN and EVPN (lab), Route-Based IPsec Site-to-Site VPN (IKEv2, VTI), FRR (lab), VMware VeloCloud SD-WAN, Cisco Nexus, Cisco Catalyst, Cisco WLC, Juniper Mist, HPE Aruba, F5 BIG-IP and BIG-IP APM Remote Access VPN"
   - area: "Cloud Networking, Systems Administration and Virtualisation"
-    items: "Google Cloud (lab: HA VPN, Cloud Router, eBGP Hybrid Connectivity), Linux, VMware vSphere, Proxmox VE, Docker and Kubernetes (lab)"
+    items: "Google Cloud (lab: VPC, HA VPN, Cloud Router, eBGP, Identity-Aware Proxy, Terraform with Import of Live Resources), Workload Identity Federation, OPNsense and VyOS (lab), Linux, VMware vSphere, Proxmox VE, Docker and Kubernetes (lab)"
   - area: "Backup, Recovery and Business Continuity"
     items: "Configuration Backup with Drift Detection, Tested Rollback and Back-Out Planning, Firewall and WAN High Availability Failover Testing, Disaster Recovery and Method of Procedure (MOP) Documentation, VMware and Proxmox Snapshot and Restore"
   - area: "Automation, Monitoring and Governance"
-    items: "Python, Ansible, Netmiko, REST APIs, Git, GitHub Actions, Checkmk, Prometheus, Grafana, SolarWinds, Syslog, SNMP, NetFlow, Wireshark, Security Monitoring, ITIL Change Management, ServiceNow, CAB, CMDB, Technical Documentation, Standards and Operating Procedures"
+    items: "Python, Ansible, Terraform, Netmiko, REST APIs, Git, GitHub Actions, Checkmk, Prometheus, Grafana, SolarWinds, Syslog, SNMP, NetFlow, Wireshark, Security Monitoring, ITIL Change Management, ServiceNow, CAB, CMDB, Technical Documentation, Standards and Operating Procedures"
 
 education:
   - degree: "B.Sc. Electronics and Communications Engineering"
