@@ -29,7 +29,7 @@ links:
     icon: "person"
 
 summary:
-  - "Network and Security Specialist with over a decade of experience across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. I co-design and secure segmented networks on zero trust principles, with default-deny between zones and defence in depth across Palo Alto, Check Point, F5, and Zscaler. Identity and access management covers 802.1X on every campus, RADIUS through Aruba ClearPass, and TACACS+ device administration through Cisco ISE."
+  - "Network & Infrastructure Security with over a decade of experience across enterprise, hospitality, and regulated gaming networks in Singapore and Canada. I design and secure segmented networks on zero trust principles, with default-deny between zones and defence in depth across Palo Alto, Check Point, F5, and Zscaler. Identity and access management covers 802.1X on every campus, RADIUS through Aruba ClearPass, and TACACS+ device administration through Cisco ISE."
   - "For compliance and IT operations, I support PCI DSS audits and DR exercises. Python and Ansible handle the repetitive work in production, with changes tested in EVE-NG first. In my hybrid lab, the Google Cloud side is moving into Terraform. I am now building an on-call triage agent that runs a tool-calling loop with Claude or a local model. It gathers evidence through read-only tools and leaves the decision to a person."
 
 experience:
@@ -39,9 +39,9 @@ experience:
     summary: "Handle network operations, incident response, and capacity planning for an enterprise estate of 700+ devices across 40+ sites in five provinces and four time zones. Take projects end to end, from requirements to implementation, while resolving routing faults, hardware failures, and firewall access issues, and advising stakeholders on infrastructure needs and risk."
     highlights_title: "Key initiatives"
     highlights:
-      - label: "Greenfield sites and data centre redesign"
+      - label: "Greenfield Sites and Data Centre Redesign"
         text: "Designed and built network and security for new campus sites, from topology planning with stakeholders to switch, edge router, and wireless deployment with RF site assessments. Designed and implemented the data centre re-segmentation on a high-speed Catalyst core, with VRF transit to the next-generation firewalls."
-      - label: "Infrastructure as code and automation"
+      - label: "Infrastructure as Code and Automation"
         text: "Built Python scripts and Ansible playbooks for provisioning, configuration backups, and state enforcement to cut manual configuration drift, with changes tested in EVE-NG before production."
 
   - role: "Lead Engineer, Network and Security (Information Services)"
@@ -50,13 +50,13 @@ experience:
     summary: "Coordinated the network side of major incidents and vendor TAC escalations, from first triage through service restoration, and fed network findings into root cause reviews, including regulator-mandated ones. Took changes through a strict Change Advisory Board (CAB) process on high-availability Cisco, Palo Alto, Check Point, and F5 platforms, with security reviews, UAT, method of procedure documents, platform snapshots, and up-to-date CMDB records. Handled the network and security section of the annual DR exercise, which cut live production traffic over to the backup data centre. Built SolarWinds health and security dashboards, and coached engineers until they handled Tier 2 and Tier 3 work on their own."
     highlights_title: "Key initiatives"
     highlights:
-      - label: "Segmentation and OT isolation"
+      - label: "Segmentation and OT Isolation"
         text: "Contributed to the security architecture of ten firewalled backbones, with the multi-vsys Palo Alto estate managed from Panorama. On the 2022 refresh, aligned configuration to the solution architect's design that gave ICS/SCADA its own virtual firewall, apart from corporate IT, and took part in the first cutovers."
-      - label: "Identity and access"
+      - label: "Identity and Access"
         text: "Administered TACACS+ device authentication on Cisco ISE and RSA MFA. Configured role-scoped vendor VPN access on F5 BIG-IP APM, enforced internet traffic inspection through Zscaler Internet Access (ZIA), and scripted hybrid Microsoft 365 and Azure AD account provisioning in PowerShell."
-      - label: "Firewall policy and PCI DSS"
+      - label: "Firewall Policy and PCI DSS"
         text: "Recertified the multi-vsys firewall rule base in AlgoSec ahead of the PCI DSS audit, retiring shadowed, duplicate, and unused rules and mapping active rules to named business owners. Worked with the compliance team on the PCI backbone audit and kept the cardholder data environment (CDE) segmented, with its boundaries checked by quarterly compliance scans."
-      - label: "Vulnerability management and threat tuning"
+      - label: "Vulnerability Management and Threat Tuning"
         text: "Ran authenticated vulnerability scans over out-of-band management paths and triaged third-party penetration test findings by CVSS score, driving firmware and hotfix remediation on Cisco, Palo Alto, F5, and Check Point appliances. Tuned inline Palo Alto IDS/IPS signatures with host-scoped exceptions, and tracked residual risk in ServiceNow problem records assigned to application owners."
 
   - role: "Senior Network Engineer (Project and Operations)"
@@ -65,13 +65,13 @@ experience:
     summary: "Deployed on site at Marina Bay Sands for infrastructure modernisation and 24/7 operations across multiple data centres, campus switching, wireless, firewall clusters, and F5 BIG-IP. Handled incident, problem, service request, and change workflows in ServiceNow, from intake through root cause analysis (RCA) and closure, while keeping CMDB records, hardware inventory, and vendor RMAs current. Set up patch management across the data centres, added SolarWinds performance monitoring, and ran scheduled access control audits with the security team."
     highlights_title: "Key initiatives"
     highlights:
-      - label: "Firewall migration and Check Point consolidation"
-        text: "Worked on the migration that moved part of the legacy Check Point estate to Palo Alto, validating the rule base and traffic flows in AlgoSec either side of each cutover. Upgraded the remaining Check Point firewalls and brought them under Multi-Domain Security Management, which the estate did not have before."
-      - label: "Multicast surveillance migration (2015 to 2016)"
+      - label: "Multicast Surveillance Migration"
         text: "Worked on moving the casino's multicast CCTV network from legacy Brocade hardware to Cisco. Prepared each area with configuration review and burn-in testing, migrated devices inside approved windows, and assisted the Cisco engineering team on the multicast cutover, with dual recording paths keeping the gaming floor cameras recording throughout."
-      - label: "Table games network (2016 to 2017)"
+      - label: "Table Games Network"
         text: "Took part in adding a live gaming service to the table games backbone, from requirements and stakeholder meetings to a new VLAN, subnet, and security zone, on a casino floor running 24/7 under Casino Regulatory Authority (CRA) rules."
-      - label: "Wireless access control"
+      - label: "Firewall Migration and Check Point Consolidation"
+        text: "Worked on the migration that moved part of the legacy Check Point estate to Palo Alto, validating the rule base and traffic flows in AlgoSec either side of each cutover. Upgraded the remaining Check Point firewalls and brought them under Multi-Domain Security Management, which the estate did not have before."
+      - label: "Wireless Access Control"
         text: "Configured enforcement policies, AD group role mapping, and RADIUS clients in Aruba ClearPass Policy Manager for the Aruba wireless controllers."
 
   - role: "Network Engineer"
@@ -81,7 +81,7 @@ experience:
       - "Deployed to NCS Pte. Ltd. to support the network for the 2015 SEA Games in Singapore."
 
 projects:
-  - name: "netops-automation"
+  - name: "NetOps Automation"
     url: "https://github.com/archievizt/netops-automation"
     kind: "Open source"
     description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
@@ -100,7 +100,7 @@ projects:
     description: "Ollama, Open WebUI, and Qdrant in the home lab, for research into local LLMs that watch a network without touching it."
 
 writing:
-  - title: "netops-automation field report"
+  - title: "NetOps Automation Field Report"
     url: "/netops-automation/"
     source: "archievizt.github.io"
 
