@@ -4,17 +4,28 @@
 # - Indent with spaces, never tabs. Plain text only; any HTML shows as text.
 # - Links must start with https://, mailto:, or / (a page on this site).
 # Project cards:
-# - focus: one or more of ai, cloud, network, security, automation, observability
+# - focus: one or more of ai, cloud, network, security, architecture, automation, observability
 #   (space separated). They drive the "Explore by focus" buttons.
 # - size: "wide" (two thirds of a row), "half", or leave it out (one third).
 # - style: "inverted" swaps the card colours to make it stand out.
+# - id: a short name with letters, numbers and hyphens only. It names the
+#   pop-up (archievizt.github.io/#p-<id>), so keep it unique.
+# - Clicking a card opens a "Behind the project" pop-up built from tagline,
+#   status, flow (one line per step), stats, sections, and links.
+
+tagline: "Calm in the craft, stoked on the commons."
 
 hero:
-  title: "Archie Abeleda"
-  role: "Network & Infrastructure Security · AI on the Network · Hybrid Cloud"
-  current: "Network Administrator @ Primacorp Ventures Inc."
-  current_detail: "Network Operation Support · Campus Support · June 2023 to present"
-  description: "Over a decade keeping high-stakes networks locked down and online, from a 24/7 regulated casino floor in Singapore to a multi-province campus estate in Canada. Lately my off hours go to pointing AI at the network. Models get to look and think. They do not get a write path, and nothing reaches a device without going through me first."
+  name: "Armando"
+  headline: "Enterprise Network, Security, AI & Cloud"
+  links:
+    - label: "GitHub"
+      url: "https://github.com/archievizt"
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/ajrabeleda"
+    - label: "CV"
+      url: "/cv.html"
+  description: "Over a decade keeping high-stakes networks locked down and online. Lately my off hours go to pointing AI at the network. Models get to look and think. They do not get a write path, and nothing reaches a device without going through me first."
   building: "Currently building: terminal coding agents on AWS and an on-call triage agent"
 
 certifications:
@@ -28,60 +39,163 @@ certifications:
     url: "https://www.credly.com/badges/52465f7d-ecf4-42b1-a696-170059bb1f92"
 
 projects:
-  - title: "Terminal Agents for Infrastructure"
+  - id: "terminal-agents"
+    title: "Terminal Agents for Infrastructure"
     role: "Flagship · In progress"
-    focus: "ai cloud security automation"
+    focus: "ai cloud security automation architecture"
     size: "wide"
     style: "inverted"
-    description: "Terminal coding agents get far more useful when they can drive the same CLI tools I use for infrastructure, network, security, and observability. The rule is simple. The agent proposes, a person reviews and merges, and CI applies. Built on AWS from scratch, doubling as practice for the Solutions Architect exam."
+    description: "Terminal coding agents get far more useful when they can drive the same CLI tools I use for infrastructure, network, security, and observability. The rule is simple. The agent proposes, a person reviews and merges, and CI applies."
     stack: ["Coding Agents", "CLI Tooling", "AWS", "Infrastructure as Code", "CI", "Human Approval"]
+    tagline: "Coding agents that work through real CLI tools, with a person holding the merge button."
+    my_role: "Builder"
+    status: "Phase one, built from scratch on AWS"
+    flow:
+      - "Task → terminal coding agent"
+      - "→ CLI tools for infrastructure, network, security, observability"
+      - "→ proposed change as a pull request"
+      - "→ human review and merge → CI plans and applies"
+    sections:
+      - heading: "Why terminal agents"
+        text: "Most of the tools I trust at work already live on the command line. An agent that can read their output and draft a change is worth more than a chat window that only gives advice. The hard part is not the model. It is deciding what the agent may touch."
+      - heading: "The guardrail"
+        text: "The agent proposes and never applies. Every change arrives as a pull request a person reads and merges, and only CI applies it. The same rule I hold for AI on a network: it gets to look and think, not to change production on its own."
+      - heading: "Why AWS"
+        text: "I am building it on AWS from scratch so the project doubles as practice for the Solutions Architect exam, and so I learn the AI side by building it rather than reading about it."
 
-  - title: "Network Automation Toolkit"
+  - id: "netops-toolkit"
+    title: "Network Automation Toolkit"
     role: "Open source · Python"
     focus: "automation network security"
     description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one Netmiko layer. Anything that writes is a dry run until I add an explicit apply flag."
     stack: ["Python", "Netmiko", "Typer CLI", "NetBox", "Drift Detection", "STIG Audit"]
+    tagline: "The boring, error-prone parts of network ops, handed to code that checks itself."
+    my_role: "Author"
+    status: "Open source"
+    stats:
+      - value: "4"
+        label: "Tools"
+      - value: "1"
+        label: "Netmiko layer"
+      - value: "Dry run"
+        label: "Default for writes"
+    sections:
+      - heading: "What it does"
+        text: "Four tools sharing one Netmiko layer, each aimed at a different chore. Config backup with drift detection, pre and post change validation, STIG-style compliance auditing with gated remediation, and IPAM sync against NetBox."
+      - heading: "Read-only first"
+        text: "The tools that only read (backup, audit, pre and post snapshots) run freely. The two that can change a device or a record, remediation and NetBox sync, are dry runs by default. They print exactly what they would do and touch nothing until I add an explicit apply flag."
+      - heading: "How it's built"
+        text: "A src-layout Python package with a Typer CLI, one command group per tool, everything routed through a single Netmiko connection layer. Inventory and rules are declarative YAML, validated on load, and credentials come from the environment, never the repo. Built and validated in an EVE-NG lab, with a setup guide that takes someone from nothing to a working run."
     links:
       - label: "Repository"
         url: "https://github.com/archievizt/netops-automation"
       - label: "Write-up"
         url: "/netops-automation/"
 
-  - title: "Hybrid Cloud on Google Cloud Platform"
+  - id: "hybrid-cloud"
+    title: "Hybrid Cloud on Google Cloud Platform"
     role: "Lab · Infrastructure as code"
-    focus: "cloud network security automation"
+    focus: "cloud network security automation architecture"
     size: "half"
-    description: "OPNsense and VyOS each hold a route-based IKEv2 tunnel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, no public IP on the cloud VM, and the hand-built cloud side imported into Terraform behind a zero-destroy plan gate."
+    description: "OPNsense and VyOS each hold a route-based IKEv2 tunnel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, no public IP on the cloud VM, and the cloud side imported into Terraform."
     stack: ["IPsec VTI", "eBGP", "HA VPN", "Cloud Router", "OPNsense", "VyOS", "Terraform", "IAP"]
+    tagline: "Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover."
+    my_role: "Design and build"
+    status: "Working, cloud side in Terraform"
+    stats:
+      - value: "2"
+        label: "Parallel tunnels"
+      - value: "3"
+        label: "Autonomous systems"
+      - value: "0"
+        label: "To destroy on import"
+    flow:
+      - "Lab LAN → OPNsense / VyOS"
+      - "→ IKEv2 IPsec over VTI, eBGP over link-local /30s"
+      - "→ HA VPN gateway → Cloud Router → VPC"
+    sections:
+      - heading: "What it is"
+        text: "Route-based IPsec from my lab to Google Cloud. OPNsense and VyOS each hold an IKEv2 tunnel over a virtual tunnel interface to the same HA VPN gateway, one per gateway interface, on their own public address, LAN, and AS number. eBGP to Cloud Router carries the routes, with prefix lists and route maps filtering both directions, so neither side can push a prefix the other did not ask for."
+      - heading: "Locked down by default"
+        text: "Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault."
+      - heading: "The cloud side as code"
+        text: "I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time."
+      - heading: "What broke along the way"
+        text: "A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing. Each one is written up with the log line that gave it away."
 
-  - title: "On-call Triage Agent"
+  - id: "triage-agent"
+    title: "On-call Triage Agent"
     role: "AI · In progress"
     focus: "ai observability"
     size: "half"
     style: "inverted"
     description: "Takes a Grafana alert, gathers evidence with read-only tools, and writes a triage note for a person to act on. Runs on Claude or a local model, with a fixtures mode so it can be demoed without touching anything real."
     stack: ["Python", "FastAPI", "Grafana Webhooks", "Read-only Tools", "Claude", "Ollama"]
+    tagline: "The 2 a.m. page, with the first half hour of digging already done."
+    my_role: "Builder"
+    status: "Scaffolded, in progress"
+    flow:
+      - "Grafana alert → webhook"
+      - "→ read-only evidence tools → triage note"
+      - "→ web page where a person makes the call"
+    sections:
+      - heading: "What it does"
+        text: "When Grafana fires, the agent picks up the alert, pulls the evidence an on-call engineer would look for first, and writes it up as a triage note on a web page. A person reads the note and decides what happens next."
+      - heading: "How it's built"
+        text: "Python and FastAPI, with the model behind a provider switch, so it runs on Claude, a local model through Ollama, or a mock. A fixtures mode replays recorded alerts, so it can be shown without touching anything real. Tests and CI from day one."
 
-  - title: "EVPN Fabric with External L3Out"
+  - id: "evpn-fabric"
+    title: "EVPN Fabric with External L3Out"
     role: "Lab · Data centre"
-    focus: "network"
+    focus: "network architecture"
     description: "Nexus 9000v spines as iBGP route reflectors over an OSPF underlay, each tenant handed to an IOS-XE router on its own VRF-Lite eBGP session, and a fifteen-point runbook through live border failover."
     stack: ["VXLAN", "EVPN", "iBGP RR", "VRF-Lite", "Nexus 9000v", "EVE-NG"]
+    tagline: "A spine-leaf EVPN fabric that hands each tenant off to the outside world on its own eBGP session. Every hop proven before I trust it."
+    my_role: "Design and build"
+    status: "Complete, open source"
+    stats:
+      - value: "7"
+        label: "Nodes"
+      - value: "15"
+        label: "Point runbook"
+      - value: "2"
+        label: "Border exits"
+    sections:
+      - heading: "What it is"
+        text: "A spine-leaf fabric on Nexus 9000v. OSPF is the underlay and nothing more. The overlay is iBGP with both spines as EVPN route reflectors, so every leaf holds two sessions no matter how many leaves I add."
+      - heading: "The L3Out handoff"
+        text: "Both leaves double as border leaves. Each tenant leaves the fabric on its own dot1q subinterface and its own eBGP session, into an external IOS-XE router that has no idea EVPN or VXLAN exists behind it. External routes come back as EVPN Type-5 and reach every host inside. If one border drops, traffic reroutes across the fabric to the other on its own."
+      - heading: "How I proved it"
+        text: "It ships as an importable EVE-NG topology with every device config baked in, and a fifteen-point runbook that runs from OSPF adjacency to live border failover. Where the virtual kit falls short of real hardware, the notes say so instead of pretending. CoPP only polices in software here, and a 9000v cannot terminate MACsec at all."
     links:
       - label: "Repository"
         url: "https://github.com/archievizt/evpn-vxlan-l3out-lab"
 
-  - title: "Cisco Catalyst SD-WAN"
+  - id: "catalyst-sdwan"
+    title: "Cisco Catalyst SD-WAN"
     role: "Lab · Study"
-    focus: "network"
+    focus: "network architecture"
     description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."
     stack: ["SD-WAN", "vManage", "Python", "DevNet"]
+    tagline: "Learning the controller-based WAN properly, one phase at a time."
+    my_role: "Self-study"
+    status: "Ongoing"
+    sections:
+      - heading: "What it is"
+        text: "A structured run through the Cisco DevNet sandboxes on vManage 20.18. Each phase has its own guide and architecture diagram, and a small Python collector records a baseline of the fabric so changes can be compared against it."
 
-  - title: "Local AI Node"
+  - id: "local-ai-node"
+    title: "Local AI Node"
     role: "Lab · Research"
     focus: "ai observability"
     description: "Ollama, Open WebUI, and Qdrant on my own hardware, for research into local models that watch a network without touching it."
     stack: ["Ollama", "Open WebUI", "Qdrant", "RAG"]
+    tagline: "Local models that read the network and reason about it out loud, with no write path."
+    my_role: "Builder"
+    status: "Research"
+    sections:
+      - heading: "What it is"
+        text: "Ollama, Open WebUI, and Qdrant on my own hardware. Local models read device state and pull the real configuration, then reason about it out loud. They get to look and think. They do not get a write path, and nothing reaches a device without going through me first."
 
 how_i_work:
   - title: "Automation that runs itself."
@@ -114,7 +228,11 @@ stack:
     items: ["Ollama", "Qwen3", "Gemma 4", "nomic-embed-text", "Qdrant", "RAG", "Open WebUI", "OpenClaw", "Gradio"]
 
 contact:
-  - label: "LinkedIn"
-    url: "https://www.linkedin.com/in/ajrabeleda"
-  - label: "GitHub"
-    url: "https://github.com/archievizt"
+  title: "Let's talk"
+  text: "Interested in a network or security role, a lab collaboration, or a technical conversation? Get in touch."
+  email: "hello@archieabeleda.dev"
+  links:
+    - label: "LinkedIn"
+      url: "https://www.linkedin.com/in/ajrabeleda"
+    - label: "GitHub"
+      url: "https://github.com/archievizt"
