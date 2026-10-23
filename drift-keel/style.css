@@ -1,4 +1,4 @@
-/* Styles for the netops-automation field report. Kept in a file so the page's
+/* Styles for the Drift-Keel field report. Kept in a file so the page's
    Content Security Policy can block inline styles. System fonts only: no third-party requests. */
   :root{
     --paper:      #F5F1E8;

@@ -97,7 +97,7 @@ projects:
     description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."
   - name: "Local AI node"
     kind: "Lab"
-    description: "Ollama, Open WebUI, and Qdrant in the home lab, for research into local LLMs that watch a network without touching it."
+    description: "Ollama, Open WebUI, and Qdrant in the lab, for research into local LLMs that watch a network without touching it."
 
 writing:
   - title: "Drift-Keel Field Report"
