@@ -221,21 +221,6 @@ how_i_work:
   - title: "Breaking my own lab."
     text: "I go looking for the weak spots before anyone else does. Better a quiet Tuesday than a Friday night."
 
-stack:
-  - area: "Network & Security"
-    items: ["Cisco", "Palo Alto", "Check Point", "Zscaler ZIA", "F5 BIG-IP APM"]
-  - area: "Perimeter & Access"
-    items: ["SD-WAN", "IDS / IPS", "NAC", "VPN (IPsec)"]
-  - area: "Cloud Networking"
-    items: ["Google Cloud VPC", "HA VPN", "Cloud Router", "eBGP", "Terraform", "Workload Identity Federation"]
-  - area: "Monitoring & Observability"
-    items: ["Checkmk", "Prometheus", "Grafana", "Dynatrace", "Splunk", "SolarWinds"]
-  - area: "Automation"
-    items: ["Python", "Ansible", "Git", "Netmiko", "GitHub Actions", "REST APIs"]
-  - area: "Platforms"
-    items: ["CentOS", "Ubuntu", "Proxmox VE", "OPNsense", "VyOS", "Firebase Hosting"]
-  - area: "AI Stack"
-    items: ["Ollama", "Qwen3", "Gemma 4", "nomic-embed-text", "Qdrant", "RAG", "Open WebUI", "OpenClaw", "Gradio"]
 
 contact:
   title: "Let's talk"

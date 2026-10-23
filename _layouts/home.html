@@ -110,17 +110,6 @@
         </div>
       </section>
 
-      <section class="stack" id="stack" aria-labelledby="stack-h">
-        <h2 id="stack-h" class="section-label">Infrastructure &amp; Security Stack</h2>
-        <dl>
-          {%- for s in home.stack -%}
-          <div class="stack-row">
-            <dt>{{ s.area | xml_escape | replace: "&apos;", "’" }}</dt>
-            <dd><ul class="tags">{% for t in s.items %}<li>{{ t | xml_escape | replace: "&apos;", "’" }}</li>{% endfor %}</ul></dd>
-          </div>
-          {%- endfor -%}
-        </dl>
-      </section>
 
     </main>
 
