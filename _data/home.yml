@@ -13,7 +13,7 @@
 # - Clicking a card opens a "Behind the project" pop-up built from tagline,
 #   status, flow (one line per step), stats, sections, and links.
 
-tagline: "Calm in the craft, stoked on the commons."
+tagline: "Calm when it breaks. Curious until it works."
 
 hero:
   title: "Archie Abeleda"
