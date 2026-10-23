@@ -7,16 +7,16 @@ My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 
 ## What lives where
 
-- `index.md` is the home page: about, certifications, how I work, projects, and the infrastructure and security stack.
+- `_data/home.yml` holds everything on the home page: the intro, certifications, project cards (with their focus tags), how I work, the stack, and the contact links. Edit the home page there.
+- `index.md` only sets the home page's titles; `_layouts/home.html` and `assets/css/home.css` lay it out. The focus buttons are plain CSS, no JavaScript.
 - Browser tab titles are the `tab_title:` line at the top of `index.md` and `cv.html`, and the `<title>` line in `netops-automation/index.html`. The `title:` line is what link previews show; keep any `|` out of it.
 - `_data/cv.yml` holds everything on the CV page. Edit the CV there.
 - `cv.html`, `_layouts/cv.html`, and `assets/css/cv.css` lay out the CV page. Its colours sit at the top of `cv.css`.
 - `_includes/security-headers.html` holds the Content Security Policy for every page.
 - `_includes/safe-url.html` checks every link that comes from `_data/cv.yml`.
 - `_includes/icon.html` draws the small icons next to the CV's header links (a globe, code brackets, a person). Pick one per link with `icon:` in `_data/cv.yml`.
-- `_config.yml` holds the name, the sidebar (intro, links, status line), the description search engines show, site address, and theme.
-- `_layouts/default.html` is the Minimal theme layout, hardened, with the sidebar built from `_config.yml` and a tidier footer.
-- `assets/css/style.scss` sets the home page's dark colours (listed at the top of the file), the wider layout (up to 1100px across, a 780px text column), and the small touches (status dot, tag chips).
+- `_config.yml` holds the site name, the description search engines show, site address, and theme. Its sidebar settings are no longer shown since the home page redesign.
+- `_layouts/default.html` and `assets/css/style.scss` are the old sidebar layout, kept as a fallback; nothing uses them now.
 - `netops-automation/` is the netops-automation field report, a standalone page with its own stylesheet and Content Security Policy.
 - `assets/cv.pdf` is optional. Add it and a PDF link appears on the CV page.
 - `SECURITY.md` says how to report a security problem; `.env.example` is the template for local settings.

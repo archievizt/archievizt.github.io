@@ -1,0 +1,120 @@
+# Everything on the home page comes from this file. Edit here, not in the layout.
+# Same rules as _data/cv.yml:
+# - Keep every value in double quotes, and never type a double quote inside one.
+# - Indent with spaces, never tabs. Plain text only; any HTML shows as text.
+# - Links must start with https://, mailto:, or / (a page on this site).
+# Project cards:
+# - focus: one or more of ai, cloud, network, security, automation, observability
+#   (space separated). They drive the "Explore by focus" buttons.
+# - size: "wide" (two thirds of a row), "half", or leave it out (one third).
+# - style: "inverted" swaps the card colours to make it stand out.
+
+hero:
+  title: "Archie Abeleda"
+  role: "Network & Infrastructure Security · AI on the Network · Hybrid Cloud"
+  current: "Network Administrator @ Primacorp Ventures Inc."
+  current_detail: "Network Operation Support · Campus Support · June 2023 to present"
+  description: "Over a decade keeping high-stakes networks locked down and online, from a 24/7 regulated casino floor in Singapore to a multi-province campus estate in Canada. Lately my off hours go to pointing AI at the network. Models get to look and think. They do not get a write path, and nothing reaches a device without going through me first."
+  building: "Currently building: terminal coding agents on AWS and an on-call triage agent"
+
+certifications:
+  - name: "CISSP"
+    url: "https://www.credly.com/badges/00c78370-a452-4af7-bec9-78c4dd4a7720"
+  - name: "CCSP"
+    url: "https://www.credly.com/badges/651c7d74-5b6c-49fd-997b-9a498aa21085"
+  - name: "Cisco Certified Specialist (Security)"
+    url: "https://www.credly.com/badges/cd480174-94f9-4bbc-83a9-6b7c5ceb7ab5"
+  - name: "Cisco Certified Specialist (Enterprise)"
+    url: "https://www.credly.com/badges/52465f7d-ecf4-42b1-a696-170059bb1f92"
+
+projects:
+  - title: "Terminal Agents for Infrastructure"
+    role: "Flagship · In progress"
+    focus: "ai cloud security automation"
+    size: "wide"
+    style: "inverted"
+    description: "Terminal coding agents get far more useful when they can drive the same CLI tools I use for infrastructure, network, security, and observability. The rule is simple. The agent proposes, a person reviews and merges, and CI applies. Built on AWS from scratch, doubling as practice for the Solutions Architect exam."
+    stack: ["Coding Agents", "CLI Tooling", "AWS", "Infrastructure as Code", "CI", "Human Approval"]
+
+  - title: "Network Automation Toolkit"
+    role: "Open source · Python"
+    focus: "automation network security"
+    description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one Netmiko layer. Anything that writes is a dry run until I add an explicit apply flag."
+    stack: ["Python", "Netmiko", "Typer CLI", "NetBox", "Drift Detection", "STIG Audit"]
+    links:
+      - label: "Repository"
+        url: "https://github.com/archievizt/netops-automation"
+      - label: "Write-up"
+        url: "/netops-automation/"
+
+  - title: "Hybrid Cloud on Google Cloud Platform"
+    role: "Lab · Infrastructure as code"
+    focus: "cloud network security automation"
+    size: "half"
+    description: "OPNsense and VyOS each hold a route-based IKEv2 tunnel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, no public IP on the cloud VM, and the hand-built cloud side imported into Terraform behind a zero-destroy plan gate."
+    stack: ["IPsec VTI", "eBGP", "HA VPN", "Cloud Router", "OPNsense", "VyOS", "Terraform", "IAP"]
+
+  - title: "On-call Triage Agent"
+    role: "AI · In progress"
+    focus: "ai observability"
+    size: "half"
+    style: "inverted"
+    description: "Takes a Grafana alert, gathers evidence with read-only tools, and writes a triage note for a person to act on. Runs on Claude or a local model, with a fixtures mode so it can be demoed without touching anything real."
+    stack: ["Python", "FastAPI", "Grafana Webhooks", "Read-only Tools", "Claude", "Ollama"]
+
+  - title: "EVPN Fabric with External L3Out"
+    role: "Lab · Data centre"
+    focus: "network"
+    description: "Nexus 9000v spines as iBGP route reflectors over an OSPF underlay, each tenant handed to an IOS-XE router on its own VRF-Lite eBGP session, and a fifteen-point runbook through live border failover."
+    stack: ["VXLAN", "EVPN", "iBGP RR", "VRF-Lite", "Nexus 9000v", "EVE-NG"]
+    links:
+      - label: "Repository"
+        url: "https://github.com/archievizt/evpn-vxlan-l3out-lab"
+
+  - title: "Cisco Catalyst SD-WAN"
+    role: "Lab · Study"
+    focus: "network"
+    description: "A structured run through the Cisco DevNet sandboxes on vManage 20.18, with phase guides, architecture diagrams, and a Python baseline collector."
+    stack: ["SD-WAN", "vManage", "Python", "DevNet"]
+
+  - title: "Local AI Node"
+    role: "Lab · Research"
+    focus: "ai observability"
+    description: "Ollama, Open WebUI, and Qdrant on my own hardware, for research into local models that watch a network without touching it."
+    stack: ["Ollama", "Open WebUI", "Qdrant", "RAG"]
+
+how_i_work:
+  - title: "Automation that runs itself."
+    text: "Python and Ansible handle the toil, so I never babysit a CLI for the same task twice."
+  - title: "Agents propose, people decide."
+    text: "Coding agents and triage agents get the tools and the evidence. A person still makes the call."
+  - title: "Hybrid cloud as code."
+    text: "My lab reaches Google Cloud over two IPsec tunnels with BGP on top, and one Terraform variable tears the tunnels down when I'm done."
+  - title: "Aggressive segmentation."
+    text: "Every segment walled off from the rest. Default-deny or it didn't happen."
+  - title: "Self-hosted AI."
+    text: "Local models on my own hardware, tuned where the cloud can't watch."
+  - title: "Breaking my own lab."
+    text: "I go looking for the weak spots before anyone else does. Better a quiet Tuesday than a Friday night."
+
+stack:
+  - area: "Network & Security"
+    items: ["Cisco", "Palo Alto", "Check Point", "Zscaler ZIA", "F5 BIG-IP APM"]
+  - area: "Perimeter & Access"
+    items: ["SD-WAN", "IDS / IPS", "NAC", "VPN (IPsec)"]
+  - area: "Cloud Networking"
+    items: ["Google Cloud VPC", "HA VPN", "Cloud Router", "eBGP", "Terraform", "Workload Identity Federation"]
+  - area: "Monitoring & Observability"
+    items: ["Checkmk", "Prometheus", "Grafana", "Dynatrace", "Splunk", "SolarWinds"]
+  - area: "Automation"
+    items: ["Python", "Ansible", "Git", "Netmiko", "GitHub Actions", "REST APIs"]
+  - area: "Platforms"
+    items: ["CentOS", "Ubuntu", "Proxmox VE", "OPNsense", "VyOS", "Firebase Hosting"]
+  - area: "AI Stack"
+    items: ["Ollama", "Qwen3", "Gemma 4", "nomic-embed-text", "Qdrant", "RAG", "Open WebUI", "OpenClaw", "Gradio"]
+
+contact:
+  - label: "LinkedIn"
+    url: "https://www.linkedin.com/in/ajrabeleda"
+  - label: "GitHub"
+    url: "https://github.com/archievizt"

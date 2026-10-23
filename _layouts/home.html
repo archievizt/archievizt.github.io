@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--
+  Home page layout. Content lives in _data/home.yml, styles in
+  assets/css/home.css. Like the CV, every value is HTML-escaped (xml_escape,
+  apostrophes turned into ’), and every link from the data file goes through
+  _includes/safe-url.html (https://, mailto:, or /... only).
+
+  No JavaScript. The "Explore by focus" buttons are radio buttons, and the
+  stylesheet hides the cards that do not match the checked one (CSS :has).
+  Browsers too old for :has simply show every card.
+-->
+{%- assign home = site.data.home -%}
+{%- assign known_focus = "ai cloud network security automation observability" | split: " " -%}
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    {% include security-headers.html %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.tab_title | default: page.title | default: site.title | xml_escape }}</title>
+{% seo title=false %}
+    {% assign build_stamp = site.time | date: '%s' %}
+    <link rel="stylesheet" href="{{ "/assets/css/home.css?v=" | append: build_stamp | relative_url }}">
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Site">
+      <div class="topbar-in">
+        <a class="brand" href="{{ "/" | relative_url }}"><span class="prompt" aria-hidden="true">&gt;_</span> ARCHIE // NETWORK &amp; SECURITY</a>
+        <span class="topbar-note">Calm in the chaos. Stoked in the lab.</span>
+      </div>
+    </nav>
+
+    <main class="page" id="top">
+
+      <section class="hero">
+        <h1>{{ home.hero.title | xml_escape | replace: "&apos;", "’" }}</h1>
+        <p class="hero-role">{{ home.hero.role | xml_escape | replace: "&apos;", "’" }}</p>
+        <div class="hero-current">
+          <p class="now">{{ home.hero.current | xml_escape | replace: "&apos;", "’" }}</p>
+          <p class="now-detail">{{ home.hero.current_detail | xml_escape | replace: "&apos;", "’" }}</p>
+        </div>
+        <p class="hero-desc">{{ home.hero.description | xml_escape | replace: "&apos;", "’" }}</p>
+        <p class="hero-building">{{ home.hero.building | xml_escape | replace: "&apos;", "’" }}</p>
+        {% if home.certifications %}
+        <ul class="certs" aria-label="Certifications">
+          {%- for c in home.certifications -%}
+          {%- capture href -%}{%- include safe-url.html url=c.url -%}{%- endcapture -%}
+          {%- assign href = href | strip -%}
+          <li>{% if href != "" %}<a href="{{ href }}">{{ c.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ c.name | xml_escape | replace: "&apos;", "’" }}{% endif %}</li>
+          {%- endfor -%}
+        </ul>
+        {% endif %}
+      </section>
+
+      <section class="projects" id="projects" aria-labelledby="projects-h">
+        <h2 id="projects-h" class="section-label">Projects</h2>
+
+        <fieldset class="filters">
+          <legend>Explore by focus</legend>
+          <input type="radio" name="focus" id="f-all" checked><label for="f-all">All</label>
+          <input type="radio" name="focus" id="f-ai"><label for="f-ai">AI &amp; Agents</label>
+          <input type="radio" name="focus" id="f-cloud"><label for="f-cloud">Cloud</label>
+          <input type="radio" name="focus" id="f-network"><label for="f-network">Network</label>
+          <input type="radio" name="focus" id="f-security"><label for="f-security">Security</label>
+          <input type="radio" name="focus" id="f-automation"><label for="f-automation">Automation</label>
+          <input type="radio" name="focus" id="f-observability"><label for="f-observability">Observability</label>
+        </fieldset>
+
+        <div class="grid">
+          {%- for p in home.projects -%}
+          {%- capture classes -%}card{% if p.size == "wide" %} wide{% elsif p.size == "half" %} half{% endif %}{% if p.style == "inverted" %} inverted{% endif %}{% assign words = p.focus | default: "" | split: " " %}{% for w in words %}{% if known_focus contains w %} f-{{ w }}{% endif %}{% endfor %}{%- endcapture %}
+          <article class="{{ classes | strip }}">
+            <div class="card-top">
+              <span class="card-role">{{ p.role | xml_escape | replace: "&apos;", "’" }}</span>
+            </div>
+            <h3>{{ p.title | xml_escape | replace: "&apos;", "’" }}</h3>
+            <p class="card-desc">{{ p.description | xml_escape | replace: "&apos;", "’" }}</p>
+            <div class="card-foot">
+              {% if p.stack %}<ul class="tags" aria-label="Stack">{% for t in p.stack %}<li>{{ t | xml_escape | replace: "&apos;", "’" }}</li>{% endfor %}</ul>{% endif %}
+              {% if p.links %}<p class="card-links">
+                {%- for l in p.links -%}
+                {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
+                {%- assign href = href | strip -%}
+                {%- if href != "" -%}<a href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }} <span aria-hidden="true">↗</span></a>{%- endif -%}
+                {%- endfor -%}
+              </p>{% endif %}
+            </div>
+          </article>
+          {%- endfor -%}
+        </div>
+      </section>
+
+      <section class="work" id="how-i-work" aria-labelledby="work-h">
+        <h2 id="work-h" class="section-label">How I work</h2>
+        <div class="work-grid">
+          {%- for w in home.how_i_work -%}
+          <div class="work-item">
+            <h3>{{ w.title | xml_escape | replace: "&apos;", "’" }}</h3>
+            <p>{{ w.text | xml_escape | replace: "&apos;", "’" }}</p>
+          </div>
+          {%- endfor -%}
+        </div>
+      </section>
+
+      <section class="stack" id="stack" aria-labelledby="stack-h">
+        <h2 id="stack-h" class="section-label">Infrastructure &amp; Security Stack</h2>
+        <dl>
+          {%- for s in home.stack -%}
+          <div class="stack-row">
+            <dt>{{ s.area | xml_escape | replace: "&apos;", "’" }}</dt>
+            <dd><ul class="tags">{% for t in s.items %}<li>{{ t | xml_escape | replace: "&apos;", "’" }}</li>{% endfor %}</ul></dd>
+          </div>
+          {%- endfor -%}
+        </dl>
+      </section>
+
+    </main>
+
+    <footer class="foot">
+      <p>Built with Jekyll, hosted on GitHub Pages, no JavaScript. <a href="https://github.com/archievizt/archievizt.github.io">Source</a>.</p>
+    </footer>
+
+    <nav class="dock" aria-label="Quick links">
+      <a href="#projects">Projects</a>
+      <span class="dock-sep" aria-hidden="true"></span>
+      <a href="{{ "/cv.html" | relative_url }}">CV</a>
+      {%- for l in home.contact -%}
+      {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
+      {%- assign href = href | strip -%}
+      {%- if href != "" %}
+      <a class="{% if forloop.first %}dock-accent{% endif %}" href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>
+      {%- endif -%}
+      {%- endfor %}
+    </nav>
+  </body>
+</html>
