@@ -73,13 +73,13 @@ projects:
       - heading: "Why AWS"
         text: "I am building it on AWS from scratch so the project doubles as practice for the Solutions Architect exam, and so I learn the AI side by building it rather than reading about it."
 
-  - id: "netops-toolkit"
-    title: "Network Automation Toolkit"
+  - id: "drift-keel"
+    title: "Drift-Keel"
     role: "Open source · Python"
     focus: "automation network security"
-    description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one Netmiko layer. Anything that writes is a dry run until I add an explicit apply flag."
+    description: "A network automation toolkit. Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one Netmiko layer. Anything that writes is a dry run until I add an explicit apply flag."
     stack: ["Python", "Netmiko", "Typer CLI", "NetBox", "Drift Detection", "STIG Audit"]
-    tagline: "The boring, error-prone parts of network ops, handed to code that checks itself."
+    tagline: "A network automation toolkit that keeps config on course. The boring, error-prone parts of network ops, handed to code that checks itself."
     my_role: "Author"
     status: "Open source"
     stats:
@@ -98,9 +98,9 @@ projects:
         text: "A src-layout Python package with a Typer CLI, one command group per tool, everything routed through a single Netmiko connection layer. Inventory and rules are declarative YAML, validated on load, and credentials come from the environment, never the repo. Built and validated in an EVE-NG lab, with a setup guide that takes someone from nothing to a working run."
     links:
       - label: "Repository"
-        url: "https://github.com/archievizt/netops-automation"
+        url: "https://github.com/archievizt/drift-keel"
       - label: "Write-up"
-        url: "/netops-automation/"
+        url: "/drift-keel/"
 
   - id: "hybrid-cloud"
     title: "Hybrid Cloud on Google Cloud Platform"

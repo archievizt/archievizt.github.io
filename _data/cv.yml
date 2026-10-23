@@ -81,10 +81,10 @@ experience:
       - "Deployed to NCS Pte. Ltd. to support the network for the 2015 SEA Games in Singapore."
 
 projects:
-  - name: "NetOps Automation"
-    url: "https://github.com/archievizt/netops-automation"
+  - name: "Drift-Keel"
+    url: "https://github.com/archievizt/drift-keel"
     kind: "Open source"
-    description: "Config backup with drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
+    description: "Network automation toolkit with config backup and drift detection, pre and post change validation, STIG-style compliance audits, and NetBox sync on one inventory and one Netmiko connection layer. Anything that writes is a dry run until told otherwise."
   - name: "Hybrid Cloud on Google Cloud Platform"
     kind: "Lab"
     description: "Route-based IKEv2 IPsec over virtual tunnel interfaces from OPNsense and VyOS, built in parallel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, IKE and ESP only from the Google peer, and the cloud VM reached through Identity-Aware Proxy with no public IP. The cloud side was imported into Terraform behind a zero-destroy plan gate, with per-tunnel teardown and pre-shared keys that rotate one tunnel at a time."
@@ -100,8 +100,8 @@ projects:
     description: "Ollama, Open WebUI, and Qdrant in the home lab, for research into local LLMs that watch a network without touching it."
 
 writing:
-  - title: "NetOps Automation Field Report"
-    url: "/netops-automation/"
+  - title: "Drift-Keel Field Report"
+    url: "/drift-keel/"
     source: "archievizt.github.io"
 
 skills:
