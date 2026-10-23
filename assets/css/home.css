@@ -288,12 +288,10 @@ html:has(.modal:target) .dock { display: none; }
 .cert-name { display: block; color: var(--head); font-weight: 700; font-size: 14px; }
 .cert-meta { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
 
-/* Official logos, supplied as files in assets/img/icons/. The file is used as
-   a mask, so it takes the circle's text colour and flips with the theme. */
-.logo { display: block; width: 22px; height: 22px; background: currentColor;
-  -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
-.logo-github { -webkit-mask-image: url("../img/icons/github.svg"); mask-image: url("../img/icons/github.svg"); }
-.logo-linkedin { width: 19px; height: 19px; -webkit-mask-image: url("../img/icons/linkedin.svg"); mask-image: url("../img/icons/linkedin.svg"); }
-
 /* Certifications pop-up is wider than Contact, so each name fits on one line. */
 #certifications .modal-panel { width: min(580px, 100%); }
+
+/* Text links under "Currently building": GITHUB  LINKEDIN  RESUME */
+.text-links { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 24px; }
+.text-links a { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.text-links a:hover { color: var(--head); text-decoration: none; }

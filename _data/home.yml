@@ -18,19 +18,13 @@ tagline: "Calm in the craft, stoked on the commons."
 hero:
   title: "Archie Abeleda"
   headline: "Enterprise Network · Security · AI · Cloud"
-  # Round icon links under "Currently building". icon: "github", "linkedin",
-  # "code", "person" or "cv". github and linkedin use the official logo files
-  # in assets/img/icons/ (github.svg, linkedin.svg), downloaded from each
-  # company's brand page; code and person are plain stand-ins.
+  # Text links under "Currently building", shown in small capitals.
   links:
     - label: "GitHub"
-      icon: "github"
       url: "https://github.com/archievizt"
     - label: "LinkedIn"
-      icon: "linkedin"
       url: "https://www.linkedin.com/in/ajrabeleda"
-    - label: "CV"
-      icon: "cv"
+    - label: "Resume"
       url: "/cv.html"
   description: "Over a decade keeping high-stakes networks locked down and online. Lately my off hours go to pointing AI at the network. Models get to look and think. They do not get a write path, and nothing reaches a device without going through me first."
   building: "Currently building: terminal coding agents on AWS and an on-call triage agent"
