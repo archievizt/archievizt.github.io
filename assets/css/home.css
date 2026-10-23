@@ -291,7 +291,8 @@ html:has(.modal:target) .dock { display: none; }
 /* Certifications pop-up is wider than Contact, so each name fits on one line. */
 #certifications .modal-panel { width: min(580px, 100%); }
 
-/* Text links under "Currently building": GITHUB  LINKEDIN  RESUME */
-.text-links { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 24px; }
-.text-links a { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
-.text-links a:hover { color: var(--head); text-decoration: none; }
+/* Links under "Currently building", as outlined pills */
+.text-links { margin: 18px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.text-links a { display: inline-block; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px;
+  color: var(--body); font-size: 12px; font-weight: 700; }
+.text-links a:hover { border-color: var(--link); color: var(--head); text-decoration: none; }
