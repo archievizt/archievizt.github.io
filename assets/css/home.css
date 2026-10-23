@@ -261,7 +261,7 @@ html:has(.modal:target) .dock { display: none; }
 .card-links > * { white-space: nowrap; }
 
 /* Hero headline: "Armando · Enterprise Network, Security, AI & Cloud" */
-.hero h1 { font-size: clamp(28px, 3.6vw, 40px); line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; }
+.hero h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; }
 .hero-dot { color: var(--muted); }
 .hero-links { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .hero-links a { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--raised);
@@ -269,3 +269,21 @@ html:has(.modal:target) .dock { display: none; }
 .hero-links a:hover { border-color: var(--link); text-decoration: none; }
 /* Green "live" dot now sits on the Currently building line */
 .hero-building.now { margin: 18px 0 0; font-weight: 400; font-size: 12px; color: var(--head); }
+
+/* Round icon links: filled circle in the heading colour, glyph in the page colour,
+   so they flip correctly with the light/dark switch. */
+.icon-links { list-style: none; margin: 18px 0 0; padding: 0; display: flex; gap: 12px; }
+.icon-links a { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px;
+  border-radius: 50%; background: var(--head); color: var(--bg); transition: transform .15s, background .15s; }
+.icon-links a:hover { transform: translateY(-2px); background: var(--link); color: var(--bg); text-decoration: none; }
+.icon-links svg { width: 21px; height: 21px; }
+.icon-links .cut { fill: var(--head); }
+.icon-links a:hover .cut { fill: var(--link); }
+
+/* Certifications pop-up */
+.modal-small .modal-body > p { margin: 0 0 12px; }
+.cert-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cert-list a, .cert-list li > span { display: block; padding: 12px 14px; border-radius: 12px; background: var(--raised); border: 1px solid var(--line); }
+.cert-list a:hover { border-color: var(--link); text-decoration: none; }
+.cert-name { display: block; color: var(--head); font-weight: 700; font-size: 14px; }
+.cert-meta { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }

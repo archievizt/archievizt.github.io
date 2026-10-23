@@ -44,25 +44,25 @@
     <main class="page" id="top">
 
       <section class="hero">
-        <h1><span class="hero-name">{{ home.hero.name | xml_escape | replace: "&apos;", "’" }}</span><span class="hero-dot" aria-hidden="true"> · </span><span class="hero-skills">{{ home.hero.headline | xml_escape | replace: "&apos;", "’" }}</span></h1>
-        {% if home.hero.links %}<p class="hero-links">
+        <h1>{{ home.hero.title | xml_escape | replace: "&apos;", "’" }}</h1>
+        <p class="hero-role">{{ home.hero.headline | xml_escape | replace: "&apos;", "’" }}</p>
+        <p class="hero-desc">{{ home.hero.description | xml_escape | replace: "&apos;", "’" }}</p>
+        <p class="hero-building now">{{ home.hero.building | xml_escape | replace: "&apos;", "’" }}</p>
+        {% if home.hero.links %}<ul class="icon-links">
           {%- for l in home.hero.links -%}
           {%- capture href -%}{%- include safe-url.html url=l.url -%}{%- endcapture -%}
           {%- assign href = href | strip -%}
-          {%- if href != "" -%}<a href="{{ href }}">{{ l.label | xml_escape | replace: "&apos;", "’" }}</a>{%- endif -%}
-          {%- endfor -%}
-        </p>{% endif %}
-        <p class="hero-desc">{{ home.hero.description | xml_escape | replace: "&apos;", "’" }}</p>
-        <p class="hero-building now">{{ home.hero.building | xml_escape | replace: "&apos;", "’" }}</p>
-        {% if home.certifications %}
-        <ul class="certs" aria-label="Certifications">
-          {%- for c in home.certifications -%}
-          {%- capture href -%}{%- include safe-url.html url=c.url -%}{%- endcapture -%}
-          {%- assign href = href | strip -%}
-          <li>{% if href != "" %}<a href="{{ href }}">{{ c.name | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ c.name | xml_escape | replace: "&apos;", "’" }}{% endif %}</li>
-          {%- endfor -%}
-        </ul>
-        {% endif %}
+          {%- if href != "" %}
+          <li><a href="{{ href }}" title="{{ l.label | xml_escape }}"><span class="visually-hidden">{{ l.label | xml_escape | replace: "&apos;", "’" }}</span>
+            {%- case l.icon -%}
+            {%- when "code" -%}<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg>
+            {%- when "person" -%}<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg>
+            {%- when "cv" -%}<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor"><path d="M6 2h9l4 4v16H6z"/><circle cx="12.5" cy="9" r="2.4" class="cut"/><path class="cut" d="M8.6 15c.4-2 2-3 3.9-3s3.5 1 3.9 3zM8.5 17.5h8v1.5h-8z"/></svg>
+            {%- endcase -%}
+          </a></li>
+          {%- endif -%}
+          {%- endfor %}
+        </ul>{% endif %}
       </section>
 
       <section class="projects" id="projects" aria-labelledby="projects-h">
@@ -186,13 +186,33 @@
       </div>
     </section>
 
+    <section class="modal modal-small" id="certifications" role="dialog" aria-modal="true" aria-labelledby="certs-h">
+      <a class="modal-backdrop" href="#top" tabindex="-1" aria-hidden="true"></a>
+      <div class="modal-panel">
+        <div class="modal-bar">
+          <h2 id="certs-h">Certifications</h2>
+          <a class="modal-close" href="#top" aria-label="Close">✕</a>
+        </div>
+        <div class="modal-body">
+          <p>Each one links to its verified badge on Credly.</p>
+          <ul class="cert-list">
+            {%- for c in home.certifications -%}
+            {%- capture href -%}{%- include safe-url.html url=c.url -%}{%- endcapture -%}
+            {%- assign href = href | strip %}
+            <li>{% if href != "" %}<a href="{{ href }}">{% endif %}<span class="cert-name">{{ c.name | xml_escape | replace: "&apos;", "’" }}</span><span class="cert-meta">{{ c.issuer | xml_escape | replace: "&apos;", "’" }}{% if c.issuer and c.date %} · {% endif %}{{ c.date | xml_escape | replace: "&apos;", "’" }}</span>{% if href != "" %}</a>{% endif %}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <footer class="foot">
       <p>Built with Jekyll, hosted on GitHub Pages, no JavaScript. <a href="https://github.com/archievizt/archievizt.github.io">Source</a>.</p>
     </footer>
 
     <nav class="dock" aria-label="Quick links">
       <a href="#projects">Projects</a>
-      <a href="{{ "/cv.html" | relative_url }}">CV</a>
+      <a href="#certifications">Certifications</a>
       <span class="dock-sep" aria-hidden="true"></span>
       <a class="dock-accent" href="#contact"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Contact</a>
     </nav>
