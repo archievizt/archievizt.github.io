@@ -107,11 +107,11 @@ projects:
     role: "Lab · Infrastructure as code"
     focus: "cloud network security automation architecture"
     size: "half"
-    description: "OPNsense and VyOS each hold a route-based IKEv2 tunnel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. Default-deny on both routers, no public IP on the cloud VM, and the cloud side imported into Terraform."
-    stack: ["IPsec VTI", "eBGP", "HA VPN", "Cloud Router", "OPNsense", "VyOS", "Terraform", "IAP"]
+    description: "OPNsense and VyOS each hold a route-based IKEv2 tunnel to one Google Cloud HA VPN gateway, with eBGP across three autonomous systems and route filtering both ways. The cloud side runs from Terraform, with keys in Secret Manager, alerts on tunnel and BGP health, and one switch that stops the tunnel bill."
+    stack: ["IPsec VTI", "eBGP", "HA VPN", "Cloud Router", "OPNsense", "VyOS", "Terraform", "Secret Manager", "IAP"]
     tagline: "Two routers, one cloud gateway, three autonomous systems. Built twice on purpose, so I could compare the platforms without a cutover."
     my_role: "Design and build"
-    status: "Working, cloud side in Terraform"
+    status: "Working, published with a full build guide"
     stats:
       - value: "2"
         label: "Parallel tunnels"
@@ -129,9 +129,18 @@ projects:
       - heading: "Locked down by default"
         text: "Both routers run default-deny. IKE and ESP are accepted only from the Google peer, SSH on VyOS listens on the LAN alone, and the cloud VM has no external IP at all. I reach it through Identity-Aware Proxy. MTU and MSS are tuned for the tunnel, because ping working while transfers hang is the classic hybrid fault."
       - heading: "The cloud side as code"
-        text: "I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map, one variable builds or tears down each tunnel while the gateway addresses stay fixed, and the pre-shared keys are sensitive values that rotate one tunnel at a time."
+        text: "I built it by hand first, then imported it into Terraform instead of rebuilding, and nothing got applied until the plan showed zero to destroy. Each router is one entry in a map. The pre-shared keys live in Secret Manager, never in a file, and adding a new key version replaces only that one tunnel. One variable switches the tunnels off at the end of a session, so the lab costs nothing while the gateway keeps its addresses. State sits in a versioned, locked-down Cloud Storage bucket."
+      - heading: "Watched, and safe to publish"
+        text: "Cloud Monitoring emails me when a tunnel or a BGP session stays down for five minutes, set up so the end-of-session teardown does not page me. The public repo uses documentation addresses only, gitleaks and a private denylist hook block real values at commit time, and a plan-only GitHub Actions workflow signs in through Workload Identity Federation, so no cloud key is stored anywhere."
       - heading: "What broke along the way"
-        text: "A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing. Each one is written up with the log line that gave it away."
+        text: "A base64 key that broke IKE authentication, a missing DH group, and a BGP session that showed Established while advertising nothing. Each one is in the build guide with the log line that gave it away, along with thirty corrections to my first notes."
+      - heading: "Lab versus production"
+        text: "Two routers on separate networks give two connections, not redundancy. Production would run two tunnels per router across both gateway interfaces, with BGP authentication, BFD, and a dedicated service account. The repo lists each of those gaps on purpose."
+    links:
+      - label: "Repository"
+        url: "https://github.com/archievizt/hybrid-cloud-lab"
+      - label: "Build guide"
+        url: "https://github.com/archievizt/hybrid-cloud-lab/blob/main/docs/BEGINNER_GUIDE.md"
 
   - id: "triage-agent"
     title: "On-call Triage Agent"
