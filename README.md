@@ -1,39 +1,47 @@
-<div align="center">
+# archievizt.github.io
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hello-dark.svg">
-  <img src="assets/hello-light.svg" alt="Hey folks, I'm Archie 👋" width="440">
-</picture>
+My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 
-**Enterprise Network · Security · Architecture · AI  · Cloud**
+- Home page: https://archievizt.github.io
+- CV: https://archievizt.github.io/cv.html
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=flat&logo=github&logoColor=white)](https://archievizt.github.io)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-1B6F9A?style=flat)](https://www.linkedin.com/in/ajrabeleda)
-[![Let's talk](https://img.shields.io/badge/%40%20Let's%20talk-4B8BBE?style=flat)](mailto:hello@archieabeleda.dev)
+## What lives where
 
-</div>
+- `_data/home.yml` holds everything on the home page: the intro, certifications, project cards (with their focus tags), how I work, the stack, and the contact links. Edit the home page there.
+- `index.md` only sets the home page's titles; `_layouts/home.html` and `assets/css/home.css` lay it out. The focus buttons are plain CSS, no JavaScript.
+- Browser tab titles are the `tab_title:` line at the top of `index.md` and `cv.html`, and the `<title>` line in `drift-keel/index.html`. The `title:` line is what link previews show; keep any `|` out of it.
+- `_data/cv.yml` holds everything on the CV page. Edit the CV there.
+- `cv.html`, `_layouts/cv.html`, and `assets/css/cv.css` lay out the CV page. Its colours sit at the top of `cv.css`.
+- `_includes/security-headers.html` holds the Content Security Policy for every page.
+- `_includes/safe-url.html` checks every link that comes from `_data/cv.yml`.
+- `_includes/icon.html` draws the small icons next to the CV's header links (a globe, code brackets, a person). Pick one per link with `icon:` in `_data/cv.yml`.
+- `_config.yml` holds the site name, the description search engines show, site address, and theme. Its sidebar settings are no longer shown since the home page redesign.
+- `_layouts/default.html` and `assets/css/style.scss` are the old sidebar layout, kept as a fallback; nothing uses them now.
+- `drift-keel/` is the Drift-Keel field report (formerly netops-automation; `netops-automation/` now only redirects there), a standalone page with its own stylesheet and Content Security Policy.
+- `assets/cv.pdf` is optional. Add it and a PDF link appears on the CV page.
+- `SECURITY.md` says how to report a security problem; `.env.example` is the template for local settings.
 
----
+## Editing in the browser
 
-Over a decade securing enterprise networks, now bringing my zero-trust habits to cloud and AI, where agents get read-only access and every change needs a human sign-off.
+Open a file, click the pencil icon, change the text, then click Commit changes. The site updates within a few minutes.
 
-<br>
-<br>
+In `_data/cv.yml`, keep each line of text inside double quotes, indent with spaces (never tabs), and keep the `- ` at the start of each bullet. The full rules are at the top of that file. The same rules apply to the `sidebar` part of `_config.yml`.
 
-**What I'm into right now** <picture><source media="(prefers-color-scheme: dark)" srcset="assets/laptop-dark.svg"><img src="assets/laptop-light.svg" alt="" height="28" align="absmiddle"></picture>
+## Security
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/terminal-dark.svg">
-  <img src="assets/terminal-light.svg" alt="What I'm into right now: secure networks with cloud and AI guardrails; currently exploring AI-driven security operations; OPNsense and VyOS peering with Google Cloud over eBGP; the cloud side kept in Terraform with zero destroys; a Grafana triage agent that brings evidence, not verdicts; Drift-Keel STIG audits that change nothing" width="500">
-</picture>
+- No secrets live here and none are needed. Never commit keys, passwords, or tokens. For a local setting, copy `.env.example` to `.env`: git ignores `.env`, and Jekyll never publishes files starting with a dot.
+- Every page carries a Content Security Policy. The site runs no JavaScript and loads nothing from other domains, so an injected script, outside image, or form is refused by the browser. Adding a script or outside service means allowing it in `_includes/security-headers.html` first.
+- Everything from `_data/cv.yml` and the `sidebar` settings in `_config.yml` is HTML-escaped, and their links must start with `https://`, `mailto:`, or `/`, or they show as plain text.
+- This repository is public. Keep personal details to what you mean to publish, and strip location data from photos before adding them.
+- There are no GitHub Actions workflows. If you add one, set `permissions: contents: read` at the top and pin every action to a full commit SHA.
+- Keep Dependabot alerts and push protection on (Settings, Advanced Security).
 
-<br>
-<br>
-<br>
-<br>
+## Preview locally (optional)
 
-<div align="center">
+```
+bundle config set --local path vendor/bundle
+bundle install
+bundle exec jekyll serve
+```
 
-*Learning by building resilient systems from the ground up* <picture><source media="(prefers-color-scheme: dark)" srcset="assets/mesh-dark.svg"><img src="assets/mesh-light.svg" alt="" height="26" align="absmiddle"></picture> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/bricks-dark.svg"><img src="assets/bricks-light.svg" alt="" height="24" align="absmiddle"></picture>
-
-</div>
+Then open http://127.0.0.1:4000. The preview only listens on your own computer; don't add `--host 0.0.0.0` on a shared network. Commit the `Gemfile.lock` that `bundle install` creates, so versions stay pinned.
