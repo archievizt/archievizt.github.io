@@ -139,8 +139,8 @@ projects:
     links:
       - label: "Repository"
         url: "https://github.com/archievizt/hybrid-cloud-lab"
-      - label: "Build guide"
-        url: "https://github.com/archievizt/hybrid-cloud-lab/blob/main/docs/BEGINNER_GUIDE.md"
+      - label: "Write-up"
+        url: "/hybrid-cloud-lab/"
 
   - id: "triage-agent"
     title: "On-call Triage Agent"

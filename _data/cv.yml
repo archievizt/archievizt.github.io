@@ -104,6 +104,9 @@ writing:
   - title: "Drift-Keel Field Report"
     url: "/drift-keel/"
     source: "archievizt.github.io"
+  - title: "Hybrid Cloud Lab Field Report"
+    url: "/hybrid-cloud-lab/"
+    source: "archievizt.github.io"
 
 skills:
   - area: "Cybersecurity Operations and Controls"

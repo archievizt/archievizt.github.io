@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Report: Hybrid Cloud Lab</title>
+<meta name="description" content="Route-based IPsec and eBGP from a lab to Google Cloud, built twice in parallel on OPNsense and VyOS, then imported into Terraform without rebuilding anything.">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead reveal r1">
+    <span class="mono">hybrid-cloud-lab &middot; <span class="accent">field report</span></span>
+    <span class="mono">Issue 02 &middot; 2026</span>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <div class="hero reveal r2">
+    <span class="mono">Project dossier</span>
+    <h1>Two routers, one cloud gateway, and a plan that destroys nothing.</h1>
+    <p class="deck">Route-based IPsec and eBGP from my lab to Google Cloud, built twice
+      in parallel on OPNsense and VyOS, then handed to Terraform without rebuilding a
+      single resource.</p>
+
+    <div class="stats">
+      <div class="stat"><b>2</b><span class="mono">Tunnels</span></div>
+      <div class="stat"><b>3</b><span class="mono">Autonomous systems</span></div>
+      <div class="stat"><b>0</b><span class="mono">To destroy</span></div>
+      <div class="stat"><b>$0</b><span class="mono">Per hour, torn down</span></div>
+    </div>
+  </div>
+
+  <!-- ============ CONTENTS ============ -->
+  <nav class="contents reveal r3" aria-label="In this report">
+    <span class="mono">In this report</span>
+    <ul>
+      <li><a href="#why">Why I built it</a></li>
+      <li><a href="#design">The design</a></li>
+      <li><a href="#gates">Built in gates</a></li>
+      <li><a href="#broke">What broke</a></li>
+      <li><a href="#code">The cloud side as code</a></li>
+      <li><a href="#secure">Security and cost</a></li>
+      <li><a href="#prod">Lab versus production</a></li>
+      <li><a href="#get">Get the code</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============ 01 WHY ============ -->
+  <section id="why">
+    <div class="mono sec-label">Section 01</div>
+    <h2>Why I built it</h2>
+    <p class="lead">Most hybrid cloud write-ups stop at "the tunnel is up". The real work
+      starts after that: routes that quietly fail to arrive, packets that ping fine but
+      hang on transfer, and a cloud side that nobody can rebuild because it was clicked
+      together by hand.</p>
+    <p>I wanted to do it properly, end to end. A route-based IPsec tunnel from my lab to
+      Google Cloud, eBGP carrying the routes instead of static entries, filters on both
+      sides, alerts when something drops, and the cloud side described as code.</p>
+    <p>I built it on OPNsense first, to learn it. Then, instead of switching over, I
+      built the same thing again on VyOS, on a second public address, running side by
+      side. Two platforms doing the same job is the fastest way I know to understand
+      what each one is really doing.</p>
+  </section>
+
+  <!-- ============ 02 THE DESIGN ============ -->
+  <section id="design">
+    <div class="mono sec-label">Section 02</div>
+    <h2>The design</h2>
+    <p>Each router holds one IKEv2 tunnel to a single Google Cloud HA VPN gateway, one per
+      gateway interface. The tunnel is bound to a virtual tunnel interface, so the routing
+      table decides what goes in, not a fixed list of networks. eBGP runs over the tunnel
+      on a link-local /30 and talks to Cloud Router, which writes the learned routes into
+      the VPC.</p>
+
+    <div class="flow" aria-label="Design: two lab networks, two routers, IPsec and eBGP to one HA VPN gateway, Cloud Router, and the VPC">
+      <div class="row two">
+        <div class="cell">OPNsense<br>AS 65002<br>10.2.10.0/24</div>
+        <div class="cell">VyOS<br>AS 65003<br>10.2.20.0/24</div>
+      </div>
+      <div class="arrow">&darr; IKEv2 IPsec over VTI &middot; eBGP on link-local /30s &darr;</div>
+      <div class="layer">
+        <span class="k">Google Cloud &middot; us-west1</span>
+        HA VPN gateway (interface 0 and interface 1)
+      </div>
+      <div class="arrow">&darr;</div>
+      <div class="layer">
+        <span class="k">AS 65001</span>
+        Cloud Router &rarr; vpc-hub &rarr; 10.8.10.0/24
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Block</th><th>Purpose</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td><code>10.2.10.0/24</code></td><td>Lab network behind OPNsense</td><td>Private, easy to remember</td></tr>
+          <tr><td><code>10.2.20.0/24</code></td><td>Lab network behind VyOS</td><td>Separate on purpose, so each tunnel can be proven on its own</td></tr>
+          <tr><td><code>10.8.10.0/24</code></td><td>Google Cloud subnet</td><td>Must never overlap the lab</td></tr>
+          <tr><td><code>169.254.10.0/30</code><br><code>169.254.20.0/30</code></td><td>BGP peering, one per tunnel</td><td>Link-local, cannot leak to the internet</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Three private AS numbers, one each for Google, OPNsense, and VyOS, make every
+      session external BGP, which brings loop protection for free. Phase 1 and phase 2 use
+      AES-256, SHA-256, and DH group 14. The tunnel interfaces run at MTU 1400 with MSS
+      clamped to 1360, because a ping that works while file transfers hang is the classic
+      hybrid fault.</p>
+
+    <p class="pull">Overlap is silent. Google stops you creating overlapping subnets inside
+      one VPC, but nothing stops overlap between the lab and the cloud. Pick the ranges
+      once and write them down.</p>
+  </section>
+
+  <!-- ============ 03 BUILT IN GATES ============ -->
+  <section id="gates">
+    <div class="mono sec-label">Section 03</div>
+    <h2>Built in gates</h2>
+    <p>Every phase ends with a gate: a short test that must pass before the next phase
+      starts. Almost every painful moment came from a problem in one layer showing up as a
+      symptom in another, and gates stop problems from stacking.</p>
+    <ol class="gates">
+      <li><span class="g">Gate 0</span><span>The firewall reaches the internet on its own public address.</span></li>
+      <li><span class="g">Gate 1</span><span>The Google side is ready and nothing is billing yet.</span></li>
+      <li><span class="g">Gate 2</span><span>The Google end of the tunnel exists and is waiting for the lab.</span></li>
+      <li><span class="g">Gate 3</span><span>Phase 1 and phase 2 are up, and the tunnel interface is live.</span></li>
+      <li><span class="g">Gate 4</span><span>BGP is established and routes are exchanged both ways.</span></li>
+      <li><span class="g">Gate 5</span><span>Data flows end to end, and a full-size packet proves the MTU.</span></li>
+      <li><span class="g">Gate 6</span><span>Firewall rules and route filters are tightened, and it all still works.</span></li>
+      <li><span class="g">Gate 7</span><span>A deliberate break sends an alert email, and the incident closes on recovery.</span></li>
+      <li><span class="g">Gate 8</span><span>VyOS does the same, in parallel, on interface 1.</span></li>
+      <li><span class="g">Gate 9</span><span>Terraform describes what is running, and the plan says no changes.</span></li>
+    </ol>
+  </section>
+
+  <!-- ============ 04 WHAT BROKE ============ -->
+  <section id="broke">
+    <div class="mono sec-label">Section 04</div>
+    <h2>What broke, and what gave it away</h2>
+    <p>The faults worth writing down are the ones where every individual piece looked
+      right. Each of these ended with one command or one log line.</p>
+
+    <div class="tool">
+      <div class="num">1</div>
+      <div>
+        <h3>The firewall could not find its own gateway</h3>
+        <p>The ISP handoff VLAN was allowed on the hypervisor's switch port but not on the
+          link between two switches. Every setting I could see was correct. The break was
+          in the middle.</p>
+        <div class="log">show mac address-table vlan &lt;ISP_VLAN&gt;   # only my own MAC, never the gateway</div>
+        <div class="tags mono">
+          <span class="tag"><em>lesson</em> check the path in the middle, not just the two ends</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">2</div>
+      <div>
+        <h3>A pre-shared key that broke itself</h3>
+        <p>The key was generated as base64. Its <code>+</code>, <code>/</code>, and
+          <code>=</code> characters were mangled when pasted into a console, so the two
+          ends no longer matched.</p>
+        <div class="log">MAC mismatched   # only the PSK differs at this point</div>
+        <div class="tags mono">
+          <span class="tag"><em>fix</em> openssl rand -hex 24, kept in Secret Manager</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">3</div>
+      <div>
+        <h3>VyOS would not negotiate, and said little about why</h3>
+        <p>Google reported a negotiation failure. The phase 1 proposal on VyOS was missing
+          its Diffie-Hellman group, so the two sides never agreed on a proposal.</p>
+        <div class="log">NEGOTIATION_FAILURE</div>
+        <div class="tags mono">
+          <span class="tag"><em>fix</em> dh-group 14 in phase 1, then count the lines</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">4</div>
+      <div>
+        <h3>BGP said Established and advertised nothing</h3>
+        <p>The session was up and healthy, but Google learned zero routes. The line that
+          announces the lab network was the last line of the block, and it was the one
+          that went missing in the paste.</p>
+        <div class="log">numLearnedRoutes: 0</div>
+        <div class="tags mono">
+          <span class="tag"><em>fix</em> add the network statement, check received routes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">5</div>
+      <div>
+        <h3>The route filter ate every route</h3>
+        <p>The inbound filter permitted <code>10.8.0.0/16</code> as an exact match. Google
+          sends /24s, so nothing matched and everything was denied.</p>
+        <div class="log">show ip bgp   # empty right after adding the route maps</div>
+        <div class="tags mono">
+          <span class="tag"><em>fix</em> le 32 on FROM-GCP, soft reconfiguration to see what was dropped</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool">
+      <div class="num">6</div>
+      <div>
+        <h3>An alert every night, while nothing was wrong</h3>
+        <p>Tearing the tunnels down at the end of a session stops the metric, and the
+          default setting treats missing data as a failure.</p>
+        <div class="log">evaluation_missing_data = "EVALUATION_MISSING_DATA_INACTIVE"</div>
+        <div class="tags mono">
+          <span class="tag"><em>fix</em> missing data treated as empty, alert proven by a deliberate failure</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 THE CLOUD SIDE AS CODE ============ -->
+  <section id="code">
+    <div class="mono sec-label">Section 05</div>
+    <h2>The cloud side as code</h2>
+    <p>I built the Google side by hand first, with <code>gcloud</code>, so I understood
+      every resource. Then I imported it into Terraform instead of rebuilding it, and
+      nothing was applied until the plan showed zero to destroy.</p>
+    <p class="pull">Change the code to match reality. Never change reality to match the
+      code.</p>
+    <p>The first import plan wanted to replace things I had not touched. Each one had a
+      plain reason:</p>
+    <ul class="points">
+      <li>A peer gateway's description and redundancy type cannot be edited, only
+        replaced, so both are copied exactly from what Google holds.</li>
+      <li>Google only returns a hash of the pre-shared key, so Terraform can never compare
+        it. The key is ignored for drift, and a new version in Secret Manager replaces
+        exactly that one tunnel.</li>
+      <li>The VM's service account was not declared, so Terraform planned to remove it. It
+        is declared now.</li>
+    </ul>
+    <p>After the apply, the BGP uptime kept counting instead of resetting, which proved
+      nothing had been rebuilt, and the next plan said <code>No changes</code>.</p>
+    <p>Each router is one entry in a map. One variable builds or tears down the tunnels
+      while the HA VPN gateway, and its two public addresses, stay in place:</p>
+    <pre><span class="c"># end of a session: no tunnels, no tunnel cost</span>
+terraform apply -var='enabled_tunnels=[]'
+
+<span class="c"># start of a session: both tunnels back, about USD 0.10 an hour</span>
+terraform apply -var='enabled_tunnels=["opnsense","vyos"]'</pre>
+  </section>
+
+  <!-- ============ 06 SECURITY AND COST ============ -->
+  <section id="secure">
+    <div class="mono sec-label">Section 06</div>
+    <h2>Security and cost</h2>
+    <p>I treated every file as if it would be public, because it was always going to be.</p>
+    <ul class="points">
+      <li><b>Default-deny on both routers.</b> IKE and ESP are accepted only from the
+        Google peer address, and SSH listens on the lab LAN alone.</li>
+      <li><b>No public address on the cloud VM.</b> I reach it through Identity-Aware
+        Proxy, and Google's firewall admits only the two lab networks and IAP for SSH.</li>
+      <li><b>Keys never touch a file.</b> Pre-shared keys live in Secret Manager and are
+        read at the moment they are needed.</li>
+      <li><b>State is locked away.</b> Terraform state holds secrets in plain text, so it
+        sits in a versioned Cloud Storage bucket with public access prevention.</li>
+      <li><b>Keyless CI.</b> A plan-only GitHub Actions workflow signs in through Workload
+        Identity Federation, with actions pinned to commit SHAs, no permissions by
+        default, and only the plan's summary line printed, because public repo logs are
+        public.</li>
+      <li><b>Nothing real in the repo.</b> Public addresses use documentation ranges, and
+        gitleaks plus a private denylist hook block a commit that contains a real value.</li>
+    </ul>
+    <p>Cost is part of security. Each tunnel costs about USD 0.05 an hour from the moment
+      it exists, so the tunnels come down at the end of every session. The one dangerous
+      step is a speed test left running: an hour at 1 Gbps is roughly 450 GB, about
+      USD 54, so every test runs for a fixed 20 seconds.</p>
+  </section>
+
+  <!-- ============ 07 LAB VERSUS PRODUCTION ============ -->
+  <section id="prod">
+    <div class="mono sec-label">Section 07</div>
+    <h2>Lab versus production</h2>
+    <p>This lab is not a high-availability design, and I would rather say so than have
+      someone point it out. Two routers on two separate networks give two independent
+      connections, not redundancy. If OPNsense fails, its network loses the cloud and
+      VyOS cannot help.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>In the lab</th><th>In production</th></tr></thead>
+        <tbody>
+          <tr><td>One tunnel per router</td><td>Two tunnels per router, one to each HA VPN interface</td></tr>
+          <tr><td>Two routers, two networks</td><td>One network behind a shared gateway, both routers announcing it</td></tr>
+          <tr><td>Dead peer detection only</td><td>BFD for sub-second failure detection</td></tr>
+          <tr><td>No BGP authentication</td><td>MD5 authentication on every session</td></tr>
+          <tr><td>Default route advertisement</td><td>Custom advertisement with an explicit list</td></tr>
+          <tr><td>Default Compute service account</td><td>A dedicated account with only the roles it needs</td></tr>
+          <tr><td>Single region</td><td>Gateways and Cloud Routers in more than one region</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ 08 GET THE CODE ============ -->
+  <section id="get">
+    <div class="mono sec-label">Section 08</div>
+    <h2>Get the code</h2>
+    <p>The repository has the Terraform for the Google side, a full VyOS configuration
+      with placeholders, and a step-by-step build guide with every gate, every fault,
+      and every correction to my first notes. MIT licensed.</p>
+    <pre><span class="c"># clone the repo</span>
+git clone https://github.com/archievizt/hybrid-cloud-lab.git
+cd hybrid-cloud-lab/terraform</pre>
+    <div class="links">
+      <a class="cta" href="https://github.com/archievizt/hybrid-cloud-lab">View the repository &rarr;</a>
+      <a class="cta" href="https://github.com/archievizt/hybrid-cloud-lab/blob/main/docs/BEGINNER_GUIDE.md">Read the build guide &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <span class="mono">Archie Abeleda &middot; 2026</span>
+    <span class="mono"><a href="/">archievizt.github.io</a></span>
+  </footer>
+
+</main>
+</body>
+</html>

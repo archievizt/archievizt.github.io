@@ -9,7 +9,7 @@ My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 
 - `_data/home.yml` holds everything on the home page: the intro, certifications, project cards (with their focus tags), how I work, the stack, and the contact links. Edit the home page there.
 - `index.md` only sets the home page's titles; `_layouts/home.html` and `assets/css/home.css` lay it out. The focus buttons are plain CSS, no JavaScript.
-- Browser tab titles are the `tab_title:` line at the top of `index.md` and `cv.html`, and the `<title>` line in `drift-keel/index.html`. The `title:` line is what link previews show; keep any `|` out of it.
+- Browser tab titles are the `tab_title:` line at the top of `index.md` and `cv.html`, and the `<title>` line in `drift-keel/index.html` and `hybrid-cloud-lab/index.html`. The `title:` line is what link previews show; keep any `|` out of it.
 - `_data/cv.yml` holds everything on the CV page. Edit the CV there.
 - `cv.html`, `_layouts/cv.html`, and `assets/css/cv.css` lay out the CV page. Its colours sit at the top of `cv.css`.
 - `_includes/security-headers.html` holds the Content Security Policy for every page.
@@ -18,6 +18,7 @@ My portfolio. Jekyll with the Minimal theme, built and hosted by GitHub Pages.
 - `_config.yml` holds the site name, the description search engines show, site address, and theme. Its sidebar settings are no longer shown since the home page redesign.
 - `_layouts/default.html` and `assets/css/style.scss` are the old sidebar layout, kept as a fallback; nothing uses them now.
 - `drift-keel/` is the Drift-Keel field report (formerly netops-automation; `netops-automation/` now only redirects there), a standalone page with its own stylesheet and Content Security Policy.
+- `hybrid-cloud-lab/` is the Hybrid Cloud Lab field report, built the same way: a standalone page with its own stylesheet and Content Security Policy.
 - `assets/cv.pdf` is optional. Add it and a PDF link appears on the CV page.
 - `SECURITY.md` says how to report a security problem; `.env.example` is the template for local settings.
 

@@ -101,8 +101,11 @@
         {%- capture href -%}{%- include safe-url.html url=w.url -%}{%- endcapture -%}
         {%- assign href = href | strip %}
         <article class="entry tight">
-          <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ w.title | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ w.title | xml_escape | replace: "&apos;", "’" }}{% endif %}</h3>
-          <p class="source">{{ w.source | xml_escape | replace: "&apos;", "’" }}</p>
+          <h3 class="plain">{% if href != "" %}<a href="{{ href }}">{{ w.title | xml_escape | replace: "&apos;", "’" }}</a>{% else %}{{ w.title | xml_escape | replace: "&apos;", "’" }}{% endif %}{%- comment -%}
+              One line per entry, like Certifications: the source sits after the
+              title and only ever wraps as a whole.
+            {%- endcomment -%}
+            {%- if w.source -%}<span class="org">&nbsp;<span class="nowrap"><span class="bar" aria-hidden="true">-</span>&nbsp;{{ w.source | xml_escape | replace: "&apos;", "’" }}</span></span>{%- endif -%}</h3>
         </article>
         {% endfor %}
       </section>
