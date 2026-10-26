@@ -29,8 +29,8 @@ links:
     icon: "person"
 
 summary:
-  - "Network and Security Specialist with over a decade securing enterprise, hospitality, and regulated gaming networks in Singapore and Canada, currently focused on bringing modern controls to the infrastructure layer, with zero trust segmentation, identity-based access, endpoint detection and response, cloud networking as code, and AI coding agents put to work on the network safely."
-  - "Deep expertise in next-generation firewalls, network segmentation, 802.1X access control, and change-controlled operations under PCI DSS; working knowledge of Google Cloud hybrid connectivity, Terraform, Python and Ansible automation, and local LLM tooling. My main project pairs terminal coding agents with CLI-driven infrastructure, network, security, and observability tools, where read-only access and a human approval keep the agent useful without letting it change production on its own."
+  - "Network and Infrastructure Security Professional with over a decade of experience securing corporate, hospitality, and regulated gaming networks in Singapore and Canada. Strong background in next-generation firewalls, network segmentation, 802.1X access control, and change-controlled operations under PCI DSS. Current areas of work include zero-trust segmentation, identity-based access, endpoint detection and response (EDR), and cloud networking using Infrastructure as Code (IaC). Working knowledge of Google Cloud hybrid connectivity, Terraform, Python, Ansible, and local LLM tools."
+  - "I'm currently working on a project to connect terminal-based coding agents with CLI tools for network, infrastructure, security, and observability tasks. The goal is to give agents read-only access while requiring human approval for any production changes."
 
 experience:
   - role: "Network Administrator (Network Operation Support)"
