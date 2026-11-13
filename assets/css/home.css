@@ -54,7 +54,20 @@ h1, h2, h3 { color: var(--head); margin: 0; }
 .brand { color: var(--head); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; }
 .brand:hover { color: var(--head); text-decoration: none; }
 .prompt { color: var(--ok); font-family: var(--mono); margin-right: 6px; }
-.topbar-note { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+/* Terminal-style brand: Starship's green prompt, the name typed out once on load,
+   then a blinking cursor. CSS only. */
+.term { font-family: var(--mono); font-size: 13.5px; font-weight: 400; letter-spacing: 0; white-space: pre; display: inline-flex; align-items: baseline; }
+.term:hover { text-decoration: none; }
+.term .t-ok { color: var(--ok); font-weight: 700; }
+.term .t-name { display: inline-block; overflow: hidden; width: 0; vertical-align: bottom; color: var(--head); font-weight: 700;
+  animation: t-type 0.9s steps(6, end) 0.5s forwards; }
+.term:hover .t-name { color: var(--link-hover); }
+.term .t-cur { display: inline-block; width: 2px; height: 1.15em; margin-left: 2px; background: var(--head); align-self: center;
+  animation: t-blink 1.05s steps(1, end) infinite; }
+@keyframes t-type { to { width: 6ch; } }
+@keyframes t-blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .term .t-name { animation: none; width: 6ch; } .term .t-cur { animation: none; } }
+.topbar-note { color: var(--muted); font-size: 12.5px; font-weight: 400; letter-spacing: 0.01em; text-transform: lowercase; }
 
 .page { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
