@@ -150,6 +150,11 @@ ul.skills { margin: 0; padding: 0; list-style: none; }
 ul.skills li { margin: 0 0 8px; }
 ul.skills strong { color: var(--ink); }
 
+/* Justified body text: both edges line up, like a printed document. Headings, titles
+   and dates stay left. No automatic hyphenation, so every word stays whole for
+   applicant tracking systems that read the PDF. */
+.cv-summary p, .entry-sub, .entry li, ul.skills li { text-align: justify; text-justify: inter-word; hyphens: manual; }
+
 /* Footer */
 .cv-foot {
   margin-top: 40px;
@@ -169,6 +174,8 @@ ul.skills strong { color: var(--ink); }
   /* Company on one line, dates on the next; the bar between them hides. */
   .job-meta .bar { display: none; }
   .job-meta .dates { display: block; }
+  /* Narrow screens leave big gaps in justified text, so phones stay left-aligned. */
+  .cv-summary p, .entry-sub, .entry li, ul.skills li { text-align: left; }
 }
 
 /* Print: browser "Save as PDF" gives a clean, tighter CV */
